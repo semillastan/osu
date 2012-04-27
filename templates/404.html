@@ -1,0 +1,24 @@
+{% extends 'base_no_header.html' %}
+
+{% block title  %} Home {% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function(){
+            var h = window.innerHeight;
+            var h1 = $("#home").height();
+            $("#spacerJ").css('min-height', h-170-h1);
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    <div id="home">
+        Page not found.
+        <div id="clear-both"></div>
+        <div id="spacerJ"></div>
+    </div>
+    
+    <div id="clear-both"></div>
+{% endblock %}

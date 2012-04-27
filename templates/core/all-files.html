@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	<div>
+		{% for upload in uploads %}
+			<div><a href="{% url download-file upload.id %}">{{ upload }}</a></div>
+		{% endfor %}
+	</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>OSU | {% block title %}{% endblock %}</title>
+        <link rel="shortcut icon" href="{{MEDIA_URL}}images/favicon.ico" >
+        <link href="{{MEDIA_URL}}style.css" rel="stylesheet" type="text/css" />
+        <script src="{{MEDIA_URL}}js/jquery.min.js"></script>
+        <script src="{{MEDIA_URL}}js/jquery-ui.min.js"></script>
+        <script>
+            $.ajaxSetup({ 
+                 beforeSend: function(xhr, settings) {
+                     function getCookie(name) {
+                         var cookieValue = null;
+                         if (document.cookie && document.cookie != '') {
+                             var cookies = document.cookie.split(';');
+                             for (var i = 0; i < cookies.length; i++) {
+                                 var cookie = jQuery.trim(cookies[i]);
+                                 // Does this cookie string begin with the name we want?
+                             if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                 break;
+                             }
+                         }
+                     }
+                     return cookieValue;
+                     }
+                     if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                         // Only send the token to relative URLs i.e. locally.
+                         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                     }
+                 } 
+            });
+            
+            $(document).ready(function(){
+                var h = window.innerHeight;
+                $(".body").css('min-height', h-335);
+            });
+        </script>
+        {% block js  %}{% endblock %}
+        {% block css %}{% endblock %}
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            <div class="wrapper">
+				<a href="/">Home</a>
+				<a href="/admin">Site Admin</a>
+				{% if request.user.is_authenticated %}
+					<a href="{% url logout %}">Logout</a>
+				{% endif %}
+            </div>
+        </header>
+        <div class="banner">
+            
+        </div>
+        <nav>
+            <div class="wrapper">
+            
+            </div>
+        </nav>
+        <div class="body">
+            {% block body %}{% endblock %}
+        </div>
+        <footer>
+            <div class="wrapper">
+            
+            </div>
+        </footer>
+        <div style="clear:both"></div>
+    </body>
+</html>

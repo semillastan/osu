@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title  %} Home {% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+		$(document).ready(function() {
+		});
+	</script>
+{% endblock %}
+
+{% block body %}
+
+    <div id="home">
+		eOSU Project
+		<div>
+			{% if request.user.is_authenticated %}
+				<span>{{ request.user }} is logged in.</span>
+				
+				<br />
+				
+				{% if request.user.is_superuser %}
+				<div>
+					<a href="{% url upload-file %}">Upload Document</a>
+				</div>
+				<div>
+					<span>Personnel Type</span>
+					<a href="{% url all-personnel-types %}">All</a>
+					<a href="{% url add-personnel-type %}">Add</a>
+				</div>
+				<div>
+					<span>Offices</span>
+					<a href="{% url all-offices %}">All</a>
+					<a href="{% url add-office %}">Add</a>
+				</div>
+				<div>
+					<span>Users</span>
+					<a href="">All</a>
+					<a href="">Add</a>
+				</div>
+				{% endif %}
+				
+			{% else %}
+				<form action="{% url login %}" method="post">{% csrf_token %}
+					<div><span>Username</span><input type="text" name="username" id="id_username" /></div>
+					<div><span>Password</span><input type="password" name="password" id="id_password" /></div>
+					<div><input type="submit" name="submit" value="Login" /></div>
+				</form>
+			{% endif %}
+			
+			<br />
+			<br />
+			
+			<a href="{% url all-files %}">All Files</a>
+		</div>
+        <div id="clear-both"></div>
+    </div>
+    
+    <div id="clear-both"></div>
+{% endblock %}

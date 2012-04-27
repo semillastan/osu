@@ -1,0 +1,52 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+    font-family: Ebrima;
+	src: url('fonts/ebrima.ttf');
+}
+
+@font-face {
+    font-family: Ebrima-Bold;
+	src: url('fonts/ebrimabd.ttf');
+}
+
+@font-face {
+    font-family: Segan;
+	src: url('fonts/Segan-Light.ttf');
+}
+
+@font-face {
+    font-family: Proxima;
+	src: url('fonts/proxima.otf');
+}
+
+@font-face {
+    font-family: Proxima-SBold;
+	src: url('fonts/proxima-sbold.otf');
+}
+
+@font-face {
+    font-family: Tex;
+	src: url('fonts/texgyreschola-regular.otf');
+}
+
+@import url(http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic);
+
+#clear-both {
+    clear: both;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+body, html{
+	margin: 0; 
+	padding: 0;
+	height: 90%;
+    background-color: #FFF;
+    color: #000;
+    font-family: 'Crimson Text', serif;
+}

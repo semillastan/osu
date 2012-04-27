@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title  %} Contact {% endblock %}
+
+{% block extra_head %}
+    <link href="{{MEDIA_URL}}css/contact.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function(){
+        
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="contact">
+        <span class="large">Stanley T. Semilla</span>
+        <span class="small">Quezon City, Philippines</span>
+        <span class="small">mail@semillastan.com | semillastan@{gmail|yahoo}.com</span>
+        <span class="small">+63-927-276-5841</span>
+        <div id="clear-both"></div>
+    </div>
+    
+    <div id="clear-both"></div>
+{% endblock %}
