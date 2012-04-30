@@ -83,6 +83,7 @@ INSTALLED_APPS = (
     'south',
     'imagekit',
     'filetransfers',
+    'fileupload',
     
     'accounts',
     'core',

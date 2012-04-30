@@ -3,7 +3,7 @@
 {% block body %}
 	<div>
 		{% for type in types %}
-			<div><a href="">{{ type }}</a></div>
+			<div><a href="">{{ type }}</a> | <a href="{% url delete-personnel-type type.id %}">delete</a></div>
 		{% endfor %}
 	</div>
 {% endblock %}

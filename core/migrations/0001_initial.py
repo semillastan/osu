@@ -14,9 +14,9 @@ class Migration(SchemaMigration):
             ('filename', self.gf('django.db.models.fields.CharField')(unique=True, max_length=120)),
             ('file', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
             ('public', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('uploaded', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 27, 1, 53, 46, 829122))),
+            ('uploaded', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 30, 1, 44, 50, 893989))),
             ('uploaded_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='file_uploaded_by', to=orm['auth.User'])),
-            ('last_viewed', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 27, 1, 53, 46, 829201))),
+            ('last_viewed', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 30, 1, 44, 50, 894064))),
             ('last_viewed_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='file_last_viewed_by', to=orm['auth.User'])),
         ))
         db.send_create_signal('core', ['FileUpload'])
@@ -63,21 +63,31 @@ class Migration(SchemaMigration):
 
     models = {
         'accounts.office': {
-            'Meta': {'object_name': 'Office'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 1, 53, 46, 825841)'}),
+            'Meta': {'unique_together': "(('name', 'unit'),)", 'object_name': 'Office'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 890273)'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'office_created_by'", 'to': "orm['auth.User']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 1, 53, 46, 825905)'}),
-            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'office_modified_by'", 'to': "orm['auth.User']"}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'})
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 890341)'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'office_modified_by'", 'null': 'True', 'to': "orm['auth.User']"}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'}),
+            'unit': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['accounts.Unit']"})
         },
         'accounts.personneltype': {
             'Meta': {'object_name': 'PersonnelType'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 1, 53, 46, 824942)'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 889495)'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'type_created_by'", 'to': "orm['auth.User']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 1, 53, 46, 825030)'}),
-            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'type_modified_by'", 'to': "orm['auth.User']"}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 889556)'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'type_modified_by'", 'null': 'True', 'to': "orm['auth.User']"}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'})
+        },
+        'accounts.unit': {
+            'Meta': {'object_name': 'Unit'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 888694)'}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'unit_created_by'", 'to': "orm['auth.User']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 888778)'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'unit_modified_by'", 'null': 'True', 'to': "orm['auth.User']"}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'})
         },
         'auth.group': {
@@ -124,10 +134,10 @@ class Migration(SchemaMigration):
             'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
             'filename': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_viewed': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 1, 53, 46, 829201)'}),
+            'last_viewed': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 894064)'}),
             'last_viewed_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'file_last_viewed_by'", 'to': "orm['auth.User']"}),
             'public': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'uploaded': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 1, 53, 46, 829122)'}),
+            'uploaded': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 893989)'}),
             'uploaded_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'file_uploaded_by'", 'to': "orm['auth.User']"})
         }
     }

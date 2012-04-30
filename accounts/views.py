@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
-from helpers import get_object_or_404, render_to, reverse_redirect
+from helpers import *
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from accounts.forms import EditProfileForm, PersonnelTypeForm, OfficeForm
@@ -93,6 +93,7 @@ def logout_user(request):
 @login_required
 def all_personnel_types(request):
 	types = PersonnelType.objects.all()
+	print types
 	return {'types':types}
 
 @render_to('accounts/add_personnel_type.html')
@@ -107,6 +108,14 @@ def add_personnel_type(request):
 			type.save()
 			return reverse_redirect('home')
 	return {'form':form}
+	
+@login_required
+def delete_personnel_type(request, type_id=None):
+	if request.user.is_superuser:
+		type = get_object_or_None(PersonnelType, pk=type_id)
+		if type:
+			type.delete()
+	return reverse_redirect('all-personnel-types')
 
 @render_to('accounts/all_offices.html')
 @login_required

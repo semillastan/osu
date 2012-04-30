@@ -16,13 +16,21 @@ def upload_to(instance, filename):
     name = "{0}.{1}".format(instance.user.username, ext)
     return os.path.join('profiles', name)
 
+class Unit(models.Model):
+	name = models.CharField(max_length=120, verbose_name="UP Unit", unique=True)
+	
+	created = models.DateTimeField(default=datetime.datetime.now())
+	created_by = models.ForeignKey(User, verbose_name="Created by", related_name="unit_created_by")
+	modified = models.DateTimeField(default=datetime.datetime.now())
+	modified_by = models.ForeignKey(User, verbose_name="modified by", related_name="unit_modified_by", blank=True, null=True)
+
 class PersonnelType(models.Model):
 	name = models.CharField(max_length=120, verbose_name="Personnel Type", unique=True)
 	
 	created = models.DateTimeField(default=datetime.datetime.now())
 	created_by = models.ForeignKey(User, verbose_name="Created by", related_name="type_created_by")
 	modified = models.DateTimeField(default=datetime.datetime.now())
-	modified_by = models.ForeignKey(User, verbose_name="modified by", related_name="type_modified_by")
+	modified_by = models.ForeignKey(User, verbose_name="modified by", related_name="type_modified_by", blank=True, null=True)
 	
 	class Meta:
 		verbose_name = "Personnel Type"
@@ -33,15 +41,17 @@ class PersonnelType(models.Model):
 
 class Office(models.Model):
 	name = models.CharField(max_length=120, verbose_name="Office Name", unique=True)
+	unit = models.ForeignKey(Unit, verbose_name="UP Unit")
 	
 	created = models.DateTimeField(default=datetime.datetime.now())
 	created_by = models.ForeignKey(User, verbose_name="Created by", related_name="office_created_by")
 	modified = models.DateTimeField(default=datetime.datetime.now())
-	modified_by = models.ForeignKey(User, verbose_name="modified by", related_name="office_modified_by")
+	modified_by = models.ForeignKey(User, verbose_name="modified by", related_name="office_modified_by", blank=True, null=True)
 	
 	class Meta:
 		verbose_name = "Office"
 		verbose_name_plural = "Offices"
+		unique_together = ('name','unit')
 		
 	def __unicode__(self):
 		return self.name

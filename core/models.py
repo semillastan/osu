@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from accounts.models import UserProfile, PersonnelType, Office
@@ -7,9 +8,13 @@ import datetime
 
 fs = FileSystemStorage(location="private/")
 
+def validate_file_extension(value):
+    if not value.name.endswith('.pdf'):
+        raise ValidationError(u'Error message')
+
 class FileUpload(models.Model):
 	filename = models.CharField(max_length=120, verbose_name="File Name", unique=True)
-	file = models.FileField(storage=fs, upload_to=fs)
+	file = models.FileField(storage=fs, upload_to=fs, validators=[validate_file_extension])
 	public = models.BooleanField(default=True)
 
 	allowed_personnels = models.ManyToManyField(PersonnelType, related_name="file_allowed_personnel", blank=True, null=True)

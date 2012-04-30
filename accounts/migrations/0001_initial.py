@@ -8,14 +8,25 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
+        # Adding model 'Unit'
+        db.create_table('accounts_unit', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=120)),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 30, 1, 42, 35, 969933))),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='unit_created_by', to=orm['auth.User'])),
+            ('modified', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 30, 1, 42, 35, 970017))),
+            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='unit_modified_by', null=True, to=orm['auth.User'])),
+        ))
+        db.send_create_signal('accounts', ['Unit'])
+
         # Adding model 'PersonnelType'
         db.create_table('accounts_personneltype', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=120)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 27, 1, 53, 37, 647388))),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 30, 1, 42, 35, 970745))),
             ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='type_created_by', to=orm['auth.User'])),
-            ('modified', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 27, 1, 53, 37, 647472))),
-            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='type_modified_by', to=orm['auth.User'])),
+            ('modified', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 30, 1, 42, 35, 970807))),
+            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='type_modified_by', null=True, to=orm['auth.User'])),
         ))
         db.send_create_signal('accounts', ['PersonnelType'])
 
@@ -23,12 +34,16 @@ class Migration(SchemaMigration):
         db.create_table('accounts_office', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=120)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 27, 1, 53, 37, 648229))),
+            ('unit', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['accounts.Unit'])),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 30, 1, 42, 35, 971400))),
             ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='office_created_by', to=orm['auth.User'])),
-            ('modified', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 27, 1, 53, 37, 648296))),
-            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='office_modified_by', to=orm['auth.User'])),
+            ('modified', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 30, 1, 42, 35, 971460))),
+            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='office_modified_by', null=True, to=orm['auth.User'])),
         ))
         db.send_create_signal('accounts', ['Office'])
+
+        # Adding unique constraint on 'Office', fields ['name', 'unit']
+        db.create_unique('accounts_office', ['name', 'unit_id'])
 
         # Adding model 'UserProfile'
         db.create_table('accounts_userprofile', (
@@ -48,6 +63,12 @@ class Migration(SchemaMigration):
 
     def backwards(self, orm):
         
+        # Removing unique constraint on 'Office', fields ['name', 'unit']
+        db.delete_unique('accounts_office', ['name', 'unit_id'])
+
+        # Deleting model 'Unit'
+        db.delete_table('accounts_unit')
+
         # Deleting model 'PersonnelType'
         db.delete_table('accounts_personneltype')
 
@@ -60,21 +81,31 @@ class Migration(SchemaMigration):
 
     models = {
         'accounts.office': {
-            'Meta': {'object_name': 'Office'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 1, 53, 37, 648229)'}),
+            'Meta': {'unique_together': "(('name', 'unit'),)", 'object_name': 'Office'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 42, 35, 971400)'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'office_created_by'", 'to': "orm['auth.User']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 1, 53, 37, 648296)'}),
-            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'office_modified_by'", 'to': "orm['auth.User']"}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'})
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 42, 35, 971460)'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'office_modified_by'", 'null': 'True', 'to': "orm['auth.User']"}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'}),
+            'unit': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['accounts.Unit']"})
         },
         'accounts.personneltype': {
             'Meta': {'object_name': 'PersonnelType'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 1, 53, 37, 647388)'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 42, 35, 970745)'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'type_created_by'", 'to': "orm['auth.User']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 1, 53, 37, 647472)'}),
-            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'type_modified_by'", 'to': "orm['auth.User']"}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 42, 35, 970807)'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'type_modified_by'", 'null': 'True', 'to': "orm['auth.User']"}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'})
+        },
+        'accounts.unit': {
+            'Meta': {'object_name': 'Unit'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 42, 35, 969933)'}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'unit_created_by'", 'to': "orm['auth.User']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 42, 35, 970017)'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'unit_modified_by'", 'null': 'True', 'to': "orm['auth.User']"}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'})
         },
         'accounts.userprofile': {
