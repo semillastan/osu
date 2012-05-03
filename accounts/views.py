@@ -5,8 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from helpers import *
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from accounts.forms import EditProfileForm, PersonnelTypeForm, OfficeForm
-from accounts.models import UserProfile, PersonnelType, Office
+from accounts.forms import EditProfileForm, PersonnelTypeForm, OfficeForm, UnitForm, UserForm
+from accounts.models import UserProfile, PersonnelType, Office, Unit
 from django.core.mail import send_mail, EmailMessage
 from datetime import date
 
@@ -89,11 +89,31 @@ def logout_user(request):
 	logout(request)
 	return reverse_redirect('home')
 
+@render_to('accounts/all_users.html')
+@login_required
+def all_users(request):
+	users = UserProfile.objects.filter(user__is_active=True)
+	return {'users':users}
+
+@render_to('accounts/add_user.html')
+@login_required
+def add_user(request):
+	if request.user.is_authenticated and request.user.is_superuser:
+		form = UserForm()
+		if request.method == 'POST':
+			form = UserForm(data=request.POST)
+			username = request.POST['username']
+			email = request.POST['email']
+			if form.is_valid():
+				user = form.save(commit=False)
+		return {'form':form}
+	return render_to_response("home.html",{'404':'404'},
+            context_instance=RequestContext(request))
+
 @render_to('accounts/all_personnel_types.html')
 @login_required
 def all_personnel_types(request):
 	types = PersonnelType.objects.all()
-	print types
 	return {'types':types}
 
 @render_to('accounts/add_personnel_type.html')
@@ -133,5 +153,24 @@ def add_office(request):
 			type = form.save(commit=False)
 			type.created_by = type.modified_by = request.user
 			type.save()
+			return reverse_redirect('home')
+	return {'form':form}
+
+@render_to('accounts/all_units.html')
+@login_required
+def all_units(request):
+	units = Unit.objects.all()
+	return {'units':units}
+
+@render_to('accounts/add_unit.html')
+@login_required
+def add_unit(request):
+	form = UnitForm()
+	if request.method == "POST":
+		form = UnitForm(data=request.POST)
+		if form.is_valid():
+			unit = form.save(commit=False)
+			unit.created_by = unit.modified_by = request.user
+			unit.save()
 			return reverse_redirect('home')
 	return {'form':form}

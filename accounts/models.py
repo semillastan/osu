@@ -24,6 +24,13 @@ class Unit(models.Model):
 	modified = models.DateTimeField(default=datetime.datetime.now())
 	modified_by = models.ForeignKey(User, verbose_name="modified by", related_name="unit_modified_by", blank=True, null=True)
 
+	class Meta:
+		verbose_name = "UP Unit"
+		verbose_name_plural = "UP Units"
+
+	def __unicode__(self):
+		return self.name
+
 class PersonnelType(models.Model):
 	name = models.CharField(max_length=120, verbose_name="Personnel Type", unique=True)
 	
@@ -40,7 +47,7 @@ class PersonnelType(models.Model):
 		return self.name
 
 class Office(models.Model):
-	name = models.CharField(max_length=120, verbose_name="Office Name", unique=True)
+	name = models.CharField(max_length=120, verbose_name="Office Name")
 	unit = models.ForeignKey(Unit, verbose_name="UP Unit")
 	
 	created = models.DateTimeField(default=datetime.datetime.now())

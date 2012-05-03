@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block js %}
+<script>
+	$(document).ready(function(){
+		$("#id_submit").click(function(){
+			alert('Submit!');
+		});
+	});
+</script>
+{% endblock %}
+
+{% block body %}
+	<div>
+		<form action="" method="post">{% csrf_token %}
+			{% for field in form %}
+			<div>
+				<span>{{ field.label_tag }}</span>{{ field }}
+			</div>
+			{% endfor %}
+			<div><input type="button" value="Add" id="id_submit" /></div>
+		</form>
+	</div>
+{% endblock %}

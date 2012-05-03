@@ -39,14 +39,175 @@
 
 a {
     text-decoration: none;
-    color: #000;
+    color: #3e97d1;
 }
 
 body, html{
 	margin: 0; 
 	padding: 0;
 	height: 90%;
-    background-color: #FFF;
-    color: #000;
-    font-family: 'Crimson Text', serif;
+	background-color: #FFF;
+	color: #000;
+	font-family: Helvetica, Arial, sans-serif;
+	letter-spacing: 0.5px;
+}
+
+header {
+	height: 35px;
+	width: 100%;
+	background-color: #000;
+}
+
+header .links {
+	width: 1024px;
+	height: 35px;
+	line-height: 35px;
+	margin: 0 auto;
+}
+
+header .links .link {
+	min-width: 10px;
+	padding: 0 7px 0 7px;
+	line-height: 35px;
+	float: left;
+	height: 32px;
+}
+header .links .link:hover {
+	border-bottom: 3px solid #FFF;
+}
+
+header .links .link a {
+	text-decoration: None;
+	font-family: Helvetica, sans-serif;
+	font-size: 15px;
+	color: #FFF;
+}
+
+.banner {
+	width: 1024px;
+	height: 100px;
+	margin: 0 auto;
+}
+
+.banner h1 {
+	font-family: Proxima-SBold;
+	font-size: 80px;
+	color: #141414;
+}
+
+nav {
+	width: 1014px;
+	height: 35px;
+	line-height: 40px;
+	background-color: #141414;
+	margin: 0 auto;
+	padding-left: 10px;
+}
+
+/*
+nav .link {
+	display: block;
+	min-width: 10px;
+	padding: 0 7px 0 7px;
+	line-height: 35px;
+	float: left;
+	height: 32px;
+	text-decoration: None;
+	font-family: Helvetica, sans-serif;
+	font-size: 15px;
+	color: #FFF;
+	cursor: pointer;
+}
+
+nav .link:hover {
+	color: #3e97d1;
+}
+* */
+
+nav .main {
+	min-width: 10px;
+	padding: 0 7px 0 7px;
+	line-height: 35px;
+	float: left;
+	height: 32px;
+}
+
+nav .main:hover {
+	border-top: 3px solid #3f8fd2;
+	line-height: 28px;
+}
+
+nav .main .sub {
+	display: none;
+	position: fixed;
+	min-height: 35px;
+	width: 150px;
+	margin-top: -5px;
+}
+
+nav .main .sub a {
+	display: block;
+	width: 136px;
+	height: 14px;
+	line-height: 21px;
+	padding: 7px;
+	background-color: #F6F6F6;
+	border-bottom: 1px solid #d9d9d9;
+	border-left: 1px solid #d9d9d9;
+	border-right: 1px solid #d9d9d9;
+	font-size: 15px;
+	font-family: Proxima;
+	color: #141414;
+}
+
+nav .main .sub a:hover {
+	border-left: 2px solid #3f8fd2;
+	padding-left: 15px;
+	width: 127px;
+}
+
+.body {
+	min-height: 30%;
+	width: 984px;
+	padding: 20px;
+	margin: 0 auto;
+}
+
+form div {
+	min-height: 30px;
+	width: 500px;
+	margin-bottom: 5px;
+}
+
+form div span {
+	display: block;
+	width: 120px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	float: left;
+}
+
+form div input[type='text'], form div input[type='password'] {
+	border: 1px solid #4b4b4b;
+	height: 22px;
+	padding-left: 5px;
+	line-height: 22px;
+	width: 300px;
+}
+
+form div select {
+	height: 22px;
+}
+
+form div select[multiple='multiple'] {
+	height: 50px;
+	width: 200px;
+}
+
+footer {
+	height: 50px;
+	width: 1024px;
+	margin: 0 auto;
+	background-color: #CCC;
 }

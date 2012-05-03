@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounts.models import UserProfile, PersonnelType, Office
+from accounts.models import UserProfile, PersonnelType, Office, Unit
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'personnel_type', 'office', '_name', '_email', 'city', 'country']
@@ -16,7 +16,23 @@ class ProfileAdmin(admin.ModelAdmin):
 admin.site.register(UserProfile, ProfileAdmin)
 
 class TypeAdmin(admin.ModelAdmin):
-	fields = ['name','created','created_by','modified','modified_by']
+	#fields = ['name','created','created_by','modified','modified_by']
 	
+	fieldsets = [
+        (None,               {'fields': ['name']}),
+        ('Created', {'fields': ['created','created_by'], 'classes': ['collapse']}),
+        ('Modified', {'fields': ['modified','modified_by'], 'classes': ['collapse']}),
+    ]
+
+	list_display = ('name', 'created','created_by','modified','modified_by')
+
+class OfficeAdmin(admin.ModelAdmin):
+	fieldsets = [
+        (None,               {'fields': ['unit','name']}),
+        ('Created', {'fields': ['created','created_by'], 'classes': ['collapse']}),
+        ('Modified', {'fields': ['modified','modified_by'], 'classes': ['collapse']}),
+    ]
+    
+admin.site.register(Unit, TypeAdmin)
 admin.site.register(PersonnelType, TypeAdmin)
-admin.site.register(Office, TypeAdmin)
+admin.site.register(Office, OfficeAdmin)

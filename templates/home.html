@@ -12,7 +12,7 @@
 {% block body %}
 
     <div id="home">
-		eOSU Project
+		
 		<div>
 			{% if request.user.is_authenticated %}
 				<span>{{ request.user }} is logged in.</span>
@@ -22,6 +22,11 @@
 				{% if request.user.is_superuser %}
 				<div>
 					<a href="{% url upload-file %}">Upload Document</a>
+				</div>
+				<div>
+					<span>UP Units</span>
+					<a href="{% url all-units %}">All</a>
+					<a href="{% url add-unit %}">Add</a>
 				</div>
 				<div>
 					<span>Personnel Type</span>
@@ -35,8 +40,8 @@
 				</div>
 				<div>
 					<span>Users</span>
-					<a href="">All</a>
-					<a href="">Add</a>
+					<a href="{% url all-users %}">All</a>
+					<a href="{% url add-user %}">Add</a>
 				</div>
 				{% endif %}
 				

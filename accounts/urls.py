@@ -21,5 +21,12 @@ urlpatterns = patterns('',
     url(r'^office/all$', all_offices, name="all-offices"),
     url(r'^office/add$', add_office, name="add-office"),
     
+    url(r'^unit/$', all_units, name="all-units"),
+    url(r'^unit/all$', all_units, name="all-units"),
+    url(r'^unit/add$', add_unit, name="add-unit"),
+
+	url(r'^user/$', all_users, name="all-users"),
+    url(r'^user/all$', all_users, name="all-users"),
+    url(r'^user/add$', add_user, name="add-user"),
 )
 
