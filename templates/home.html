@@ -11,19 +11,27 @@
 
 {% block body %}
 
-    <div id="home">
+    <div class="home">
+		
+		<span class="title">Welcome to eOSU!</span>
+		<span class="subtitle">The online environment of the Office of the Secretary of the University.</span>
+		<br /><br />
+		<span class="message"><b>Sec.15. The Secretary of the University and of the Board of Regents.</b></span>
+		<span class="message">There shall be a Secretary of the University appointed by the Board, who shall also be the Secretary of the Board, and who shall keep such records of the University as may be designated by the Board.</span>
+		<br />
+		<span class="message small">-- Republic Act No. 9500 [An Act to Strengthen the University of the Philippines as the National University]</span>
+		<br /><br />
 		
 		<div>
+			
+		
 			{% if request.user.is_authenticated %}
-				<span>{{ request.user }} is logged in.</span>
-				
-				<br />
 				
 				{% if request.user.is_superuser %}
 				<div>
-					<a href="{% url upload-file %}">Upload Document</a>
+					<a class="upload" href="{% url upload-file %}">Upload Document</a>
 				</div>
-				<div>
+				<!--<div>
 					<span>UP Units</span>
 					<a href="{% url all-units %}">All</a>
 					<a href="{% url add-unit %}">Add</a>
@@ -42,7 +50,7 @@
 					<span>Users</span>
 					<a href="{% url all-users %}">All</a>
 					<a href="{% url add-user %}">Add</a>
-				</div>
+				</div>-->
 				{% endif %}
 				
 			{% else %}
@@ -56,7 +64,7 @@
 			<br />
 			<br />
 			
-			<a href="{% url all-files %}">All Files</a>
+			<a class="upload" href="{% url all-files %}">All Files</a>
 		</div>
         <div id="clear-both"></div>
     </div>

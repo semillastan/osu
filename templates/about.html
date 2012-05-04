@@ -2,24 +2,27 @@
 
 {% block title  %} About {% endblock %}
 
-{% block extra_head %}
-    <link href="{{MEDIA_URL}}css/contact.css" rel="stylesheet" type="text/css" />
-{% endblock %}
-
 {% block js %}
-    <script>
-        $(document).ready(function(){
-        
-        });
-    </script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+		});
+	</script>
 {% endblock %}
 
 {% block body %}
 
-    <div class="contact">
-        <span class="large">{ web developer | photographer }</span>
-        <div id="clear-both"></div>
-    </div>
+    <div class="home">
+		
+		<span class="title">About OSU</span>
+		<span class="subtitle">Office of the Secretary of the University.</span>
+		<br /><br />
+		<span class="message"><b>Sec.15. The Secretary of the University and of the Board of Regents.</b></span>
+		<span class="message">There shall be a Secretary of the University appointed by the Board, who shall also be the Secretary of the Board, and who shall keep such records of the University as may be designated by the Board.</span>
+		<br />
+		<span class="message small">-- Republic Act No. 9500 [An Act to Strengthen the University of the Philippines as the National University]</span>
+		<br /><br />
     
-    <div id="clear-both"></div>
+		<div id="clear-both"></div>
+	</div>
+	
 {% endblock %}

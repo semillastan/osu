@@ -42,6 +42,16 @@ a {
     color: #3e97d1;
 }
 
+b {
+	font-family: Proxima-SBold;
+}
+
+.line-spacer {
+	height: 5px;
+	border-bottom: 1px solid #dedede;
+	width: 100%;
+}
+
 body, html{
 	margin: 0; 
 	padding: 0;
@@ -65,13 +75,28 @@ header .links {
 	margin: 0 auto;
 }
 
-header .links .link {
+header .links .left, header .links .right {
+	width: 500px;
+	height: 35px;
+	float: left;
+}
+
+header .links .right {
+	float: right;
+}
+
+header .links .left .link, header .links .right .link {
 	min-width: 10px;
 	padding: 0 7px 0 7px;
 	line-height: 35px;
 	float: left;
 	height: 32px;
 }
+
+header .links .right .link {
+	float: right;
+}
+
 header .links .link:hover {
 	border-bottom: 3px solid #FFF;
 }
@@ -83,71 +108,45 @@ header .links .link a {
 	color: #FFF;
 }
 
-.banner {
-	width: 1024px;
-	height: 100px;
-	margin: 0 auto;
+header .links .link a span {
+	font-size: 12px;
 }
 
-.banner h1 {
+.banner {
+	background-color: #690000;
+	width: 100%;
+	height: 100px;
+}
+
+.banner .wrapper {
+	width: 984px;
+	height: 100px;
+	line-height: 100px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.banner a {
 	font-family: Proxima-SBold;
-	font-size: 80px;
-	color: #141414;
+	font-size: 36px;
+	letter-spacing: -1px;
+	color: white;
+}
+
+.bodywrapper {
+	width: 1024px;
+	margin: 0 auto;
 }
 
 nav {
-	width: 1014px;
-	height: 35px;
-	line-height: 40px;
-	background-color: #141414;
-	margin: 0 auto;
-	padding-left: 10px;
-}
-
-/*
-nav .link {
-	display: block;
-	min-width: 10px;
-	padding: 0 7px 0 7px;
-	line-height: 35px;
+	width: 250px;
+	min-height: 30%;
 	float: left;
-	height: 32px;
-	text-decoration: None;
-	font-family: Helvetica, sans-serif;
-	font-size: 15px;
-	color: #FFF;
-	cursor: pointer;
 }
 
-nav .link:hover {
-	color: #3e97d1;
-}
-* */
-
-nav .main {
-	min-width: 10px;
-	padding: 0 7px 0 7px;
-	line-height: 35px;
-	float: left;
-	height: 32px;
-}
-
-nav .main:hover {
-	border-top: 3px solid #3f8fd2;
-	line-height: 28px;
-}
-
-nav .main .sub {
-	display: none;
-	position: fixed;
-	min-height: 35px;
-	width: 150px;
-	margin-top: -5px;
-}
-
-nav .main .sub a {
+nav a {
 	display: block;
-	width: 136px;
+	width: 230px;
 	height: 14px;
 	line-height: 21px;
 	padding: 7px;
@@ -160,17 +159,19 @@ nav .main .sub a {
 	color: #141414;
 }
 
-nav .main .sub a:hover {
-	border-left: 2px solid #3f8fd2;
+nav a:hover {
+	border-left: 4px solid #690000;
 	padding-left: 15px;
-	width: 127px;
+	width: 219px;
+	cursor: pointer;
+	background-color: #e6e6e6;
 }
 
 .body {
 	min-height: 30%;
-	width: 984px;
+	width: 734px;
+	float: left;
 	padding: 20px;
-	margin: 0 auto;
 }
 
 form div {
@@ -205,9 +206,119 @@ form div select[multiple='multiple'] {
 	width: 200px;
 }
 
-footer {
+form div input[type="submit"] {
+	display: block;
+	width: 150px;
 	height: 50px;
-	width: 1024px;
-	margin: 0 auto;
-	background-color: #CCC;
+	padding: 10px;
+	background-color: #690000;
+	text-align: center;
+	line-height: 30px;
+	font-size: 18px;
+	color: #FFF;
+	font-family: Proxima;
+	border-radius: 5px;
+	border:0;
+	cursor: pointer;
+	margin-top: 10px;
 }
+
+footer {
+	border-top: 1px solid #dedede;
+	height: 30px;
+	width: 1004px;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+footer .wrapper {
+	text-align: right;
+}
+
+footer .wrapper span {
+	font-size: 12px;
+	font-family: Proxima;
+}
+
+a.upload {
+	display: block;
+	width: 150px;
+	height: 30px;
+	padding: 10px;
+	background-color: #690000;
+	text-align: center;
+	line-height: 30px;
+	font-size: 18px;
+	color: #FFF;
+	font-family: Proxima;
+	border-radius: 5px;
+}
+
+.home {
+
+}
+
+.home .title {
+	display: block;
+	font-family: Proxima-SBold;
+	font-size: 45px;
+	color: #141414;
+	letter-spacing: -1px;
+}
+
+.home .subtitle {
+	display: block;
+	font-family: Proxima;
+	font-size: 15px;
+	color: #141414;
+	letter-spacing: -1px;
+}
+
+.home .message {
+	display: block;
+	font-family: Proxima;
+	font-size: 26px;
+	color: #141414;
+	letter-spacing: -1px;
+	line-height: 28px;
+}
+
+.home .message.small {
+	font-size: 20px;
+	line-height: 22px;
+}
+
+.fileuploads {
+
+}
+
+.fileuploads .fileupload {
+	width: 100%;
+	height: 100px;
+	border-bottom: 1px solid #dedede;
+	padding: 10px;
+}
+
+.fileuploads .fileupload .filepreview {
+	width: 90px;
+	height: 100px;
+	background-color: #CCC;
+	float: left;
+	margin-right: 10px;
+}
+
+.fileuploads .fileupload a, .fileuploads .fileupload span {
+	display: block;
+	width: 854px;
+}
+
+.fileuploads .fileupload .filename {	
+	height: 35px;
+	font-size: 25px;
+}
+
+.fileuploads .fileupload .date, .fileuploads .fileupload .uploaded-by, .fileuploads .fileupload .filesize {
+	height: 14px;
+	font-size: 12px;
+}
+

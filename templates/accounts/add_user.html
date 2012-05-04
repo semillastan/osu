@@ -16,6 +16,7 @@
 			{% for field in form %}
 			<div>
 				<span>{{ field.label_tag }}</span>{{ field }}
+				{% if field.help_text %} <span>{{field.help_text}}</span> {% endif %}
 			</div>
 			{% endfor %}
 			<div><input type="button" value="Add" id="id_submit" /></div>

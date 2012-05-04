@@ -44,55 +44,44 @@
     <body>
         <header>
             <div class="links">
-				<div class="link"><a href="/">Home</a></div>
-				<div class="link"><a href="/admin">Site Admin</a></div>
-				{% if request.user.is_authenticated %}
-					<div class="link"><a href="{% url logout %}">Logout</a></div>
-				{% endif %}
+				<div class="left">
+					<div class="link"><a href="/">Home</a></div>
+					<div class="link"><a href="/about">About</a></div>
+					<div class="link"><a href="/">Contact</a></div>
+					<div class="link"><a href="/admin">Site Admin</a></div>
+				</div>
+				<div class="right">
+					{% if request.user.is_authenticated %}
+						<div class="link"><a href="{% url logout %}">Logout</a></div>
+						<div class="link"><a href=""><span>logged in as</span> {{request.user}}</a></div>
+					{% endif %}
+				</div>
             </div>
         </header>
+        <div style="clear:both"></div>
         <div class="banner">
-            <a href="/"><h1>eOSU Project</h1></a>
+			<div class="wrapper">
+				<a href="/">Office of the Secretary University and of the Board of Regents</a>
+            </div>
         </div>
-        <nav>
-			{% if request.user.is_superuser %}
-				<div class="main">
-					<a class="link" href="{% url all-units %}">UP Units</a>
-					<div class="sub">
-						<a href="{% url all-units %}">All</a>
-						<a href="{% url add-unit %}">Add</a>
-					</div>
-				</div>
-				<div class="main">
-					<a class="link" href="{% url all-personnel-types %}">Personnel Type</a>
-					<div class="sub">
-						<a href="{% url all-personnel-types %}">All</a>
-						<a href="{% url add-personnel-type %}">Add</a>
-					</div>
-				</div>
-				<div class="main">
-					<a class="link" href="{% url all-offices %}">Offices</a>
-					<div class="sub">
-						<a href="{% url all-offices %}">All</a>
-						<a href="{% url add-office %}">Add</a>
-					</div>
-				</div>
-				<div class="main">
-					<a class="link" href="{% url all-users %}">Users</a>
-					<div class="sub">
-						<a href="{% url all-users %}">All</a>
-						<a href="{% url add-user %}">Add</a>
-					</div>
-				</div>
-			{% endif %}
-        </nav>
-        <div class="body">
-            {% block body %}{% endblock %}
+		<div class="bodywrapper">
+			<nav>
+				<a class="link" href="/">Home</a>
+				<a class="link" href="/about">About OSU</a>
+				<a class="link">The UP Board of Regents</a>
+				<a class="link">The UP Gazette</a>
+				<a class="link">Administrative Issuances</a>
+				<a class="link">Contact Us</a>
+			</nav>
+			<div class="body">
+				{% block body %}{% endblock %}
+			</div>
+			<div style="clear:both"></div>
         </div>
         <footer>
             <div class="wrapper">
-            
-            </div>
+				<span>Copyright © 2009-2012 OSUweb. All Rights Reserved.</span>
+			</div>
         </footer>
         <div style="clear:both"></div>
     </body>
