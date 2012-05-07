@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %} File Browser {% endblock %}
+
+{% block body %}
+	<div class="home"><span class="title">File Browser - {{ folder.name }}</span></div>
+	<div class="line-spacer"></div>
+	<div class="folder-details">
+		{% if folder.parent %}
+			<a href="{% url open-folder folder.parent.id %}">Up One Folder</a>
+		{% else %}
+			<a href="{% url main-folders %}">Back to Main</a>
+		{% endif %}
+		<a href="{% url upload-file folder.id %}">Upload Document</a>
+		<a href="">Add Folder</a>
+		<div class="add-folder">
+			<form method="POST" action="{% url add-folder folder.id %}">{% csrf_token %}
+				{{ form }}
+				<input type='submit' value='Add Folder' />
+			</form>
+		</div>
+		<span class="date">Upload Date: {{ folder.created|date:"d M Y f" }}</span>
+		<span class="uploaded-by">Uploaded by: {{ folder.created_by }}</span>
+	</div>
+	<br />
+	<div class="fileuploads">
+		{% for subfolder in subfolders %}
+			<div class="fileupload">
+				<div class="filepreview"></div>
+				<a class="filename" href="{% url open-folder subfolder.id %}">{{ subfolder.name }}</a>
+				<span class="date">Created: {{ subfolder.created|date:"d M Y f" }}</span>
+				<span class="uploaded-by">Created by: {{ subfolder.created_by }}</span>
+				<span class="filesize">Sub-Folders:</span>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="fileuploads">
+		{% for file in files %}
+			<div class="fileupload">
+				<div class="filepreview"></div>
+				<a class="filename" href="">{{ file.filename }}</a>
+				<span class="date">Upload Date: {{ file.uploaded|date:"d M Y f" }}</span>
+				<span class="uploaded-by">Uploaded by: {{ file.uploaded_by }}</span>
+				<span class="filesize"></span>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

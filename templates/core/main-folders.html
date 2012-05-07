@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} File Browser {% endblock %}
+
+{% block body %}
+	<div class="home"><span class="title">File Browser</span></div>
+	<div class="line-spacer"></div>
+	<a href="{% url upload-file 'None' %}">Upload Document</a>
+	<a href="">Add Folder</a>
+	<div class="add-folder">
+		<form method="POST" action="{% url add-folder 'None' %}">{% csrf_token %}
+			{{ form }}
+			<input type='submit' value='Add Folder' />
+		</form>
+	</div>
+	<br />
+	<div class="fileuploads">
+		{% for folder in folders %}
+			<div class="fileupload">
+				<div class="filepreview"></div>
+				<a class="filename" href="{% url open-folder folder.id %}">{{ folder.name }}</a>
+				<span class="date">Upload Date: {{ folder.created|date:"d M Y f" }}</span>
+				<span class="uploaded-by">Uploaded by: {{ folder.created_by }}</span>
+				<span class="filesize">Sub-Folders:</span>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

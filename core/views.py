@@ -33,7 +33,10 @@ def download_file(request, file_id=None):
 				return serve_file(request, upload.file)
 	return reverse_redirect('home')
 
-def upload_file(request):
+def upload_file(request, folder_id=None):
+	folder = None
+	if folder_id != 'None':
+		folder = get_object_or_None(Folder, pk=folder_id)
 	form = UploadForm()
 	if request.method == "POST":
 		form = UploadForm(request.POST, request.FILES)
@@ -41,10 +44,52 @@ def upload_file(request):
 			file = form.save(commit=False)
 			file.uploaded = file.last_viewed = datetime.datetime.now()
 			file.uploaded_by = file.last_viewed_by = request.user
+			if folder:
+				file.folder = folder
 			file.save()
-		return reverse_redirect('home')
+		if folder:
+			return reverse_redirect('open-folder', args=[folder.id])
+		return reverse_redirect('main-folders')
 	return render_to_response("core/upload.html",{'form':form},
             context_instance=RequestContext(request))
  
-
+def up_one_folder(request, folder_id=None): 
+	if folder_id:
+		folder = get_object_or_None(Folder, pk=folder_id)
+		return reverse_redirect('open-folder', args=[folder.parent.id])
 	
+@login_required
+def main_folders(request):
+	form = FolderForm()
+	folders = Folder.objects.filter(parent=None)
+	return render_to_response("core/main-folders.html",{'folders':folders,'form':form},
+				context_instance=RequestContext(request))
+				
+@login_required
+def open_folder(request, folder_id=None):
+	form = FolderForm()
+	if folder_id:
+		folder = get_object_or_None(Folder, pk=folder_id)
+		if folder:
+			subfolders = Folder.objects.filter(parent=folder)
+			files = FileUpload.objects.filter(folder=folder)
+			return render_to_response("core/open-folder.html",{'folder':folder,'subfolders':subfolders,'files':files,'form':form},
+				context_instance=RequestContext(request))
+	else:
+		pass
+
+@login_required
+def add_folder(request, folder_id=None):
+	folder = None
+	if folder_id != 'None':
+		folder = get_object_or_None(Folder, pk=folder_id)
+	form = FolderForm()
+	if request.method == 'POST':
+		form = FolderForm(data=request.POST)
+		if form.is_valid():
+			fldr = form.save(commit=False)
+			fldr.created_by = fldr.last_viewed_by = request.user
+			fldr.save()
+			if folder:
+				return reverse_redirect('open-folder', args=[folder.id])
+			return reverse_redirect('main-folders')

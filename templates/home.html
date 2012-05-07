@@ -28,10 +28,10 @@
 			{% if request.user.is_authenticated %}
 				
 				{% if request.user.is_superuser %}
-				<div>
-					<a class="upload" href="{% url upload-file %}">Upload Document</a>
-				</div>
 				<!--<div>
+					<a class="upload" href="">Upload Document</a>
+				</div>
+				<div>
 					<span>UP Units</span>
 					<a href="{% url all-units %}">All</a>
 					<a href="{% url add-unit %}">Add</a>

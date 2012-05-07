@@ -144,7 +144,12 @@ nav {
 	float: left;
 }
 
-nav a {
+nav .main {
+	width: 250px;
+	min-height: 50px;
+}
+
+nav .main a {
 	display: block;
 	width: 230px;
 	height: 14px;
@@ -159,12 +164,46 @@ nav a {
 	color: #141414;
 }
 
-nav a:hover {
+nav .main a:hover {
 	border-left: 4px solid #690000;
 	padding-left: 15px;
 	width: 219px;
 	cursor: pointer;
 	background-color: #e6e6e6;
+}
+
+nav .extras {
+	width: 250px;
+	min-height: 50px;
+	margin-top: 50px;
+}
+
+nav .extras a {
+	display: block;
+	width: 230px;
+	height: 14px;
+	line-height: 21px;
+	padding: 7px;
+	background-color: #F6F6F6;
+	border-bottom: 1px solid #d9d9d9;
+	border-left: 1px solid #d9d9d9;
+	border-right: 1px solid #d9d9d9;
+	font-size: 15px;
+	font-family: Proxima;
+	color: #141414;
+}
+
+nav .extras span {
+	display: block;
+	width: 230px;
+	height: 14px;
+	line-height: 14px;
+	padding: 7px;
+	background-color: #141414;
+	font-size: 20px;
+	font-family: Proxima-SBold;
+	border: 1px solid #141414;
+	color: #FFF;
 }
 
 .body {

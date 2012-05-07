@@ -12,8 +12,24 @@ def validate_file_extension(value):
     if not value.name.endswith('.pdf'):
         raise ValidationError(u'Error message')
 
+class Folder(models.Model):
+	name = models.CharField(max_length=120, verbose_name="Folder Name", unique=True)
+	parent = models.ForeignKey('self', verbose_name="Parent Folder", blank=True, null=True)
+	
+	created = models.DateTimeField(default=datetime.datetime.now())
+	created_by = models.ForeignKey(User, verbose_name="Created by", related_name="folder_created_by")
+	last_viewed = models.DateTimeField(default=datetime.datetime.now())
+	last_viewed_by = models.ForeignKey(User, verbose_name="Last Viewed by", related_name="folder_last_viewed_by")
+	
+	def __unicode__(self):
+		if self.parent:
+			return "{0} - {1}".format(self.parent.name, self.name)
+		else:
+			return "{0}".format(self.name)
+
 class FileUpload(models.Model):
 	filename = models.CharField(max_length=120, verbose_name="File Name", unique=True)
+	folder = models.ForeignKey(Folder, verbose_name="Folder", blank=True, null=True)
 	file = models.FileField(storage=fs, upload_to=fs, validators=[validate_file_extension])
 	public = models.BooleanField(default=True)
 
