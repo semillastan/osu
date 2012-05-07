@@ -5,7 +5,7 @@
 {% block body %}
 	<div class="home"><span class="title">File Browser - {{ folder.name }}</span></div>
 	<div class="line-spacer"></div>
-	<div class="folder-details">
+	<div class="actions">
 		{% if folder.parent %}
 			<a href="{% url open-folder folder.parent.id %}">Up One Folder</a>
 		{% else %}
@@ -13,12 +13,15 @@
 		{% endif %}
 		<a href="{% url upload-file folder.id %}">Upload Document</a>
 		<a href="">Add Folder</a>
+		<div style="clear:both"></div>
 		<div class="add-folder">
 			<form method="POST" action="{% url add-folder folder.id %}">{% csrf_token %}
-				{{ form }}
+				<input id="id_name" type="text" name="name" maxlength=120 />
 				<input type='submit' value='Add Folder' />
 			</form>
+			<div style="clear:both"></div>
 		</div>
+		<div style="clear:both"></div>
 		<span class="date">Upload Date: {{ folder.created|date:"d M Y f" }}</span>
 		<span class="uploaded-by">Uploaded by: {{ folder.created_by }}</span>
 	</div>
@@ -27,10 +30,10 @@
 		{% for subfolder in subfolders %}
 			<div class="fileupload">
 				<div class="filepreview"></div>
-				<a class="filename" href="{% url open-folder subfolder.id %}">{{ subfolder.name }}</a>
-				<span class="date">Created: {{ subfolder.created|date:"d M Y f" }}</span>
-				<span class="uploaded-by">Created by: {{ subfolder.created_by }}</span>
-				<span class="filesize">Sub-Folders:</span>
+				<a class="filename" href="{% url open-folder subfolder.id %}">{{ subfolder.name }}</a><br /><br />
+				<span class="date">Created: {{ subfolder.created|date:"d M Y f" }}</span><br />
+				<span class="uploaded-by">Created by: {{ subfolder.created_by }}</span><br />
+				<span class="filesize">Sub-Folders:</span><br />
 			</div>
 		{% endfor %}
 	</div>
@@ -38,10 +41,10 @@
 		{% for file in files %}
 			<div class="fileupload">
 				<div class="filepreview"></div>
-				<a class="filename" href="">{{ file.filename }}</a>
-				<span class="date">Upload Date: {{ file.uploaded|date:"d M Y f" }}</span>
-				<span class="uploaded-by">Uploaded by: {{ file.uploaded_by }}</span>
-				<span class="filesize"></span>
+				<a class="filename" href="">{{ file.filename }}</a><br /><br />
+				<span class="date">Upload Date: {{ file.uploaded|date:"d M Y f" }}</span><br />
+				<span class="uploaded-by">Uploaded by: {{ file.uploaded_by }}</span><br />
+				<span class="filesize"></span><br />
 			</div>
 		{% endfor %}
 	</div>

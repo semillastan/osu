@@ -83,6 +83,7 @@ def add_folder(request, folder_id=None):
 	folder = None
 	if folder_id != 'None':
 		folder = get_object_or_None(Folder, pk=folder_id)
+	print folder
 	form = FolderForm()
 	if request.method == 'POST':
 		form = FolderForm(data=request.POST)
@@ -91,5 +92,7 @@ def add_folder(request, folder_id=None):
 			fldr.created_by = fldr.last_viewed_by = request.user
 			fldr.save()
 			if folder:
+				fldr.parent = folder
+				fldr.save()
 				return reverse_redirect('open-folder', args=[folder.id])
 			return reverse_redirect('main-folders')

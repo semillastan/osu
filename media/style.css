@@ -348,7 +348,8 @@ a.upload {
 
 .fileuploads .fileupload a, .fileuploads .fileupload span {
 	display: block;
-	width: 854px;
+	min-width: 50px;
+	float: left;
 }
 
 .fileuploads .fileupload .filename {	
@@ -361,3 +362,39 @@ a.upload {
 	font-size: 12px;
 }
 
+.actions {
+	width: 834px;
+	min-height: 30px;
+	padding: 10px;
+}
+
+.actions a {
+	display: block;
+	width: 150px;
+	height: 30px;
+	padding: 10px;
+	background-color: #690000;
+	text-align: center;
+	line-height: 30px;
+	font-size: 18px;
+	color: #FFF;
+	font-family: Proxima;
+	border-radius: 5px;
+	float: left;
+	margin-right: 10px;
+}
+
+.actions .add-folder {
+	width: 500px;
+	height: 28px;
+	margin-top: 10px;
+}
+
+.actions .add-folder form input[type="text"] {
+	width: 350px;
+	height: 28px;
+	line-height: 28px;
+	font-size: 18px;
+	border: 1px solid #d3d3d3;
+	padding-left: 10px;
+}
