@@ -155,7 +155,7 @@ nav .main a {
 	height: 14px;
 	line-height: 21px;
 	padding: 7px;
-	background-color: #F6F6F6;
+	background-image: linear-gradient(bottom, rgb(184,184,184) 3%, rgb(224,224,224) 83%);
 	border-bottom: 1px solid #d9d9d9;
 	border-left: 1px solid #d9d9d9;
 	border-right: 1px solid #d9d9d9;
@@ -370,31 +370,63 @@ a.upload {
 
 .actions a {
 	display: block;
-	width: 150px;
-	height: 30px;
-	padding: 10px;
-	background-color: #690000;
+	width: 120px;
+	height: 20px;
+	padding: 5px;
+	background-color: #f6f6f6;
+	border-bottom: 1px solid #d3d3d3;
+	border-left: 1px solid #d3d3d3;
+	border-top: 1px solid #d3d3d3;
 	text-align: center;
-	line-height: 30px;
-	font-size: 18px;
-	color: #FFF;
+	font-size: 14px;
+	line-height: 20px;
+	color: #141414;
 	font-family: Proxima;
-	border-radius: 5px;
 	float: left;
-	margin-right: 10px;
+}
+
+.actions a.last {
+	border-right: 1px solid #d3d3d3;
+}
+
+.actions a:hover {
+	background-color: #4188d2;
 }
 
 .actions .add-folder {
-	width: 500px;
-	height: 28px;
-	margin-top: 10px;
+	width: 250px;
+	height: 25px;
+	float: left;
 }
 
 .actions .add-folder form input[type="text"] {
-	width: 350px;
+	width: 170px;
 	height: 28px;
-	line-height: 28px;
-	font-size: 18px;
+	line-height: 23px;
+	font-size: 13px;
 	border: 1px solid #d3d3d3;
-	padding-left: 10px;
+	border-left: 0;
+	border-right: 0;
+	padding-left: 5px;
+	float: left;
+	font-family: Proxima;
+}
+
+.actions .add-folder form input[type="submit"] {
+	width: 50px;
+	height: 32px;
+	padding: 5px;
+	background-color: #f6f6f6;
+	border: 1px solid #d3d3d3;
+	text-align: center;
+	font-size: 14px;
+	line-height: 20px;
+	color: #141414;
+	font-family: Proxima;
+	float: left;
+	cursor: pointer;
+}
+
+.actions .add-folder form input[type="submit"]:hover {
+	background-color: #4188d2;
 }

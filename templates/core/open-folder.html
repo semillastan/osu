@@ -12,14 +12,12 @@
 			<a href="{% url main-folders %}">Back to Main</a>
 		{% endif %}
 		<a href="{% url upload-file folder.id %}">Upload Document</a>
-		<a href="">Add Folder</a>
-		<div style="clear:both"></div>
+		<a href="" class="last">Add Folder</a>
 		<div class="add-folder">
-			<form method="POST" action="{% url add-folder folder.id %}">{% csrf_token %}
-				<input id="id_name" type="text" name="name" maxlength=120 />
-				<input type='submit' value='Add Folder' />
+			<form method="POST" action="{% url add-folder 'None' %}">{% csrf_token %}
+				<input id="id_name" type="text" name="name" maxlength=120 placeholder="Enter Folder Name Here" />
+				<input type='submit' value='Add' />
 			</form>
-			<div style="clear:both"></div>
 		</div>
 		<div style="clear:both"></div>
 		<span class="date">Upload Date: {{ folder.created|date:"d M Y f" }}</span>

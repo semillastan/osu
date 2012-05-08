@@ -2,17 +2,29 @@
 
 {% block title %} File Browser {% endblock %}
 
+{% block extra_head %}
+	<script>
+		$(document).ready(function(){
+			alert("javascript");
+			var elem = $(this).find('.add-folder');
+			$(elem).hide();
+			$(this).find('a.last').click(function(){
+				alert('Click!');
+			});
+		});
+	</script>
+{% endblock %}
+
 {% block body %}
 	<div class="home"><span class="title">File Browser</span></div>
 	<div class="line-spacer"></div>
 	<div class="actions">
 		<a href="{% url upload-file 'None' %}">Upload Document</a>
-		<a href="">Add Folder</a>
-		<div style="clear:both"></div>
+		<a href="" class="last">Add Folder</a>
 		<div class="add-folder">
 			<form method="POST" action="{% url add-folder 'None' %}">{% csrf_token %}
-				<input id="id_name" type="text" name="name" maxlength=120 />
-				<input type='submit' value='Add Folder' />
+				<input id="id_name" type="text" name="name" maxlength=120 placeholder="Enter Folder Name Here" />
+				<input type='submit' value='Add' />
 			</form>
 		</div>
 	</div>
