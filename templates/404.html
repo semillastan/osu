@@ -1,24 +1,9 @@
-{% extends 'base_no_header.html' %}
+{% extends 'base.html' %}
 
-{% block title  %} Home {% endblock %}
-
-{% block js %}
-    <script>
-        $(document).ready(function(){
-            var h = window.innerHeight;
-            var h1 = $("#home").height();
-            $("#spacerJ").css('min-height', h-170-h1);
-        });
-    </script>
-{% endblock %}
+{% block title %} 404 {% endblock %}
 
 {% block body %}
-
-    <div id="home">
-        Page not found.
-        <div id="clear-both"></div>
-        <div id="spacerJ"></div>
-    </div>
-    
-    <div id="clear-both"></div>
+	<div class="home"><span class="title">404 - Page not found</span></div>
+	<div class="line-spacer"></div>
+	<h4>The page you are looking for cannot be found on the system.</h4>
 {% endblock %}

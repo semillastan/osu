@@ -2,21 +2,6 @@
 /* CSS Document */
 
 @font-face {
-    font-family: Ebrima;
-	src: url('fonts/ebrima.ttf');
-}
-
-@font-face {
-    font-family: Ebrima-Bold;
-	src: url('fonts/ebrimabd.ttf');
-}
-
-@font-face {
-    font-family: Segan;
-	src: url('fonts/Segan-Light.ttf');
-}
-
-@font-face {
     font-family: Proxima;
 	src: url('fonts/proxima.otf');
 }
@@ -26,12 +11,8 @@
 	src: url('fonts/proxima-sbold.otf');
 }
 
-@font-face {
-    font-family: Tex;
-	src: url('fonts/texgyreschola-regular.otf');
-}
-
 @import url(http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600,600italic,700,700italic);
+@import url(http://fonts.googleapis.com/css?family=Dosis:200,400,600,700);
 
 #clear-both {
     clear: both;
@@ -58,8 +39,13 @@ body, html{
 	height: 90%;
 	background-color: #FFF;
 	color: #000;
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: 'Dosis', sans-serif;
 	letter-spacing: 0.5px;
+}
+
+h4 {
+	font-family: 'Dosis', sans-serif;
+	font-weight: none;
 }
 
 header {
@@ -149,28 +135,33 @@ nav .main {
 	min-height: 50px;
 }
 
-nav .main a {
-	display: block;
+nav .main a .link {
 	width: 230px;
-	height: 14px;
-	line-height: 21px;
-	padding: 7px;
-	background-image: linear-gradient(bottom, rgb(184,184,184) 3%, rgb(224,224,224) 83%);
-	border-bottom: 1px solid #d9d9d9;
-	border-left: 1px solid #d9d9d9;
-	border-right: 1px solid #d9d9d9;
-	font-size: 15px;
-	font-family: Proxima;
-	color: #141414;
+	height: 30px;
+	padding: 10px;
+	background-color: #f6f6f6;
+	margin-top: 3px;
+	border-left: 7px solid #141414;
+	line-height: 30px;
 }
 
-nav .main a:hover {
-	border-left: 4px solid #690000;
-	padding-left: 15px;
-	width: 219px;
-	cursor: pointer;
-	background-color: #e6e6e6;
+nav .main a {
+	color: #141414;
+	font-size: 20px;
+	font-family: 'Dosis', sans-serif;
 }
+
+nav .main a:hover  {
+	color: #FFF;
+	font-size: 20px;
+}
+
+nav .main a:hover .link {
+	cursor: pointer;
+	background-color: #141414;
+	border-color: #690000;
+}
+
 
 nav .extras {
 	width: 250px;
@@ -189,7 +180,6 @@ nav .extras a {
 	border-left: 1px solid #d9d9d9;
 	border-right: 1px solid #d9d9d9;
 	font-size: 15px;
-	font-family: Proxima;
 	color: #141414;
 }
 
@@ -287,9 +277,8 @@ a.upload {
 	background-color: #690000;
 	text-align: center;
 	line-height: 30px;
-	font-size: 18px;
+	font-size: 22px;
 	color: #FFF;
-	font-family: Proxima;
 	border-radius: 5px;
 }
 
@@ -338,6 +327,10 @@ a.upload {
 	padding: 10px;
 }
 
+.fileuploads .fileupload:hover {
+	background-color: #dedede;
+}
+
 .fileuploads .fileupload .filepreview {
 	width: 90px;
 	height: 100px;
@@ -360,6 +353,29 @@ a.upload {
 .fileuploads .fileupload .date, .fileuploads .fileupload .uploaded-by, .fileuploads .fileupload .filesize {
 	height: 14px;
 	font-size: 12px;
+}
+
+.fileuploads .fileupload .fileactions a {
+	display: block;
+	width: 50px;
+	height: 10px;
+	padding: 3px;
+	background-color: #f6f6f6;
+	border-bottom: 1px solid #d3d3d3;
+	border-left: 1px solid #d3d3d3;
+	border-top: 1px solid #d3d3d3;
+	text-align: center;
+	font-size: 12px;
+	line-height: 12px;
+	color: #141414;
+	font-family: Proxima;
+	float: left;
+	margin: 0;
+	cursor: pointer;
+}
+
+.fileuploads .fileupload .fileactions a.last {
+	border-right: 1px solid #d3d3d3;
 }
 
 .actions {
@@ -429,4 +445,110 @@ a.upload {
 
 .actions .add-folder form input[type="submit"]:hover {
 	background-color: #4188d2;
+}
+
+.actions .date, .actions .uploaded-by  {
+	display: block;
+	margin-top: 5px;
+	margin-right: 7px;
+	float: left;
+}
+
+.manage {
+	width: 734px;
+	min-height: 20px;
+	padding-top: 10px;
+}
+
+.manage .type {
+	width: 160px;
+	height: 50px;
+	background-color: #f6f6f6;
+	margin-bottom: 3px;
+	margin-right: 5px;
+	padding: 5px;
+	text-align: left;
+	border-left: 7px solid #141414;
+	float: left;
+}
+
+.manage .type .img {
+	height: 25px;
+	width: 25px;
+	float: left;
+	margin-right: 5px;
+	background-color: #4b4b4b;
+	margin-top: 15px;
+}
+
+.manage .type .add {
+	height: 50px;
+	width: 50px;
+	float: right;
+	margin-left: 10px;
+	background-color: #4b4b4b;
+}
+
+.manage .type span {
+	display: block;
+	font-size: 25px;
+	margin-top: 10px;
+	float: left;
+}
+
+.manage .type:hover {
+	cursor: pointer;
+	background-color: #4b4b4b;
+	border-color: #690000;
+	color: #FFF;
+}
+
+.manage .type:hover .img {
+	background-color: #FFF;
+}
+
+.submanage {
+	width: 734px;
+	min-height: 20px;
+	padding-top: 10px;
+}
+
+.submanage .type {
+	width: 160px;
+	height: 30px;
+	background-color: #f6f6f6;
+	margin-bottom: 3px;
+	margin-right: 5px;
+	padding: 5px;
+	text-align: left;
+	border-left: 7px solid #141414;
+	float: left;
+}
+
+.submanage .type .img {
+	height: 25px;
+	width: 25px;
+	float: left;
+	margin-right: 5px;
+	background-color: #4b4b4b;
+	margin-top: 3px;
+}
+
+.submanage .type span {
+	display: block;
+	font-size: 15px;
+	margin-top: 5px;
+	float: left;
+	letter-spacing: 1px;
+}
+
+.submanage .type:hover {
+	cursor: pointer;
+	background-color: #4b4b4b;
+	border-color: #690000;
+	color: #FFF;
+}
+
+.submanage .type:hover .img {
+	background-color: #FFF;
 }

@@ -60,6 +60,8 @@ def up_one_folder(request, folder_id=None):
 	
 @login_required
 def main_folders(request):
+	if not request.user.is_superuser:
+		return reverse_redirect('404')
 	form = FolderForm()
 	folders = Folder.objects.filter(parent=None)
 	return render_to_response("core/main-folders.html",{'folders':folders,'form':form},
@@ -83,7 +85,6 @@ def add_folder(request, folder_id=None):
 	folder = None
 	if folder_id != 'None':
 		folder = get_object_or_None(Folder, pk=folder_id)
-	print folder
 	form = FolderForm()
 	if request.method == 'POST':
 		form = FolderForm(data=request.POST)
@@ -96,3 +97,18 @@ def add_folder(request, folder_id=None):
 				fldr.save()
 				return reverse_redirect('open-folder', args=[folder.id])
 			return reverse_redirect('main-folders')
+
+@login_required
+def delete_folder(request, folder_id=None):
+	folder = None
+	if folder_id:
+		folder = get_object_or_None(Folder, pk=folder_id)
+		if folder:
+			id = None
+			if folder.parent:
+				id = folder.parent.id
+			folder.delete()
+			if id:
+				return reverse_redirect('open-folder', args=[id])
+			return reverse_redirect('main-folders')
+	return reverse_redirect('404')

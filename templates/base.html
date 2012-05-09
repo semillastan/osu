@@ -7,6 +7,7 @@
         <script src="{{MEDIA_URL}}js/jquery.min.js"></script>
         <script src="{{MEDIA_URL}}js/jquery-ui.min.js"></script>
         <script src="{{MEDIA_URL}}js/dropdown.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Dosis:200,400,600,700' rel='stylesheet' type='text/css'>
         <script>
             $.ajaxSetup({ 
                  beforeSend: function(xhr, settings) {
@@ -46,8 +47,8 @@
             <div class="links">
 				<div class="left">
 					<div class="link"><a href="/">Home</a></div>
-					<div class="link"><a href="/about">About</a></div>
-					<div class="link"><a href="/contact">Contact</a></div>
+					<div class="link"><a href="/about.html">About</a></div>
+					<div class="link"><a href="/contact.html">Contact</a></div>
 					<div class="link"><a href="/admin">Site Admin</a></div>
 				</div>
 				<div class="right">
@@ -67,17 +68,18 @@
 		<div class="bodywrapper">
 			<nav>
 				<div class="main">
-					<a class="link" href="/">Home</a>
-					<a class="link" href="/about">About OSU</a>
-					<a class="link">The UP Board of Regents</a>
-					<a class="link">The UP Gazette</a>
-					<a class="link">Administrative Issuances</a>
-					<a class="link" href="/contact">Contact Us</a>
+					<a href="/"><div class="link">Home</div></a>
+					<a href="/about.html"><div class="link">About OSU</div></a>
+					<a ><div class="link">The UP Board of Regents</div></a>
+					<a ><div class="link">The UP Gazette</div></a>
+					<a ><div class="link">Administrative Issuances</div></a>
+					<a href="/contact.html"><div class="link">Contact Us</div></a>
 				</div>
 				<div class="extras">
 					<span>Extras</span>
 					{% if request.user.is_superuser %}
 						<a href="{% url main-folders %}">File Browser</a>
+						<a href="{% url manage-accounts %}">Manage Accounts</a>
 					{% endif %}
 				</div>
 			</nav>

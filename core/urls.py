@@ -16,4 +16,5 @@ urlpatterns = patterns('',
 	url(r'^folders/$', main_folders, name="main-folders"),
 	url(r'^folders/(?P<folder_id>[\w|-]+)/$', open_folder, name="open-folder"),
 	url(r'^folders/add/(?P<folder_id>[\w|-]+)/$', add_folder, name="add-folder"),
+	url(r'^folders/delete/(?P<folder_id>[\w|-]+)/$', delete_folder, name="delete-folder"),
 )

@@ -2,6 +2,23 @@
 
 {% block title %} File Browser {% endblock %}
 
+{% block js %}
+	<script>
+		$(document).ready(function(){
+			var elem = $(this).find('.add-folder');
+			$(elem).hide();
+			$(this).find('a.last').click(function(){
+				var d = $(elem).css('display');
+				if(d == 'none'){
+					$(elem).show("slide", { direction: "left" }, 500);
+				}else{
+					$(elem).hide("slide", { direction: "left" }, 500);
+				}
+			});
+		});
+	</script>
+{% endblock %}
+
 {% block body %}
 	<div class="home"><span class="title">File Browser - {{ folder.name }}</span></div>
 	<div class="line-spacer"></div>
@@ -12,16 +29,16 @@
 			<a href="{% url main-folders %}">Back to Main</a>
 		{% endif %}
 		<a href="{% url upload-file folder.id %}">Upload Document</a>
-		<a href="" class="last">Add Folder</a>
+		<a class="last">Add Folder</a>
 		<div class="add-folder">
-			<form method="POST" action="{% url add-folder 'None' %}">{% csrf_token %}
+			<form method="POST" action="{% url add-folder folder.id %}">{% csrf_token %}
 				<input id="id_name" type="text" name="name" maxlength=120 placeholder="Enter Folder Name Here" />
 				<input type='submit' value='Add' />
 			</form>
 		</div>
 		<div style="clear:both"></div>
-		<span class="date">Upload Date: {{ folder.created|date:"d M Y f" }}</span>
-		<span class="uploaded-by">Uploaded by: {{ folder.created_by }}</span>
+		<span class="date"><b>Upload Date:</b> {{ folder.created|date:"d M Y f" }}</span>
+		<span class="uploaded-by"><b>Uploaded by:</b> {{ folder.created_by }}</span>
 	</div>
 	<br />
 	<div class="fileuploads">
@@ -31,7 +48,10 @@
 				<a class="filename" href="{% url open-folder subfolder.id %}">{{ subfolder.name }}</a><br /><br />
 				<span class="date">Created: {{ subfolder.created|date:"d M Y f" }}</span><br />
 				<span class="uploaded-by">Created by: {{ subfolder.created_by }}</span><br />
-				<span class="filesize">Sub-Folders:</span><br />
+				<div class="fileactions">
+					<a>Rename</a>
+					<a href="{% url delete-folder subfolder.id %}" class='last'>Delete</a>
+				</div>
 			</div>
 		{% endfor %}
 	</div>

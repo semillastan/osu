@@ -174,3 +174,8 @@ def add_unit(request):
 			unit.save()
 			return reverse_redirect('home')
 	return {'form':form}
+
+@render_to('accounts/manage-accounts.html')
+@login_required
+def manage_accounts(request):
+	return {'None':'None'}

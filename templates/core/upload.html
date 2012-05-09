@@ -1,11 +1,32 @@
 {% extends 'base.html' %}
 
+{% block title %} Upload File {% endblock %}
+
+{% block js %}
+	<script>
+		$(document).ready(function(){
+			$(document).find('.Allowed').each(function(){
+				$(this).hide();
+			});
+			$(this).find('#Public input').click(function(){
+				$(document).find('.Allowed').each(function(){
+					if($(this).css('display') == 'none'){
+						$(this).show('slide',{'direction':'up'},500);
+					}else{
+						$(this).hide('slide',{'direction':'up'},500);
+					}
+				});
+			});
+		});
+	</script>
+{% endblock %}
+
 {% block body %}
 	<div>
 		<form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
 			{% for field in form %}
-			<div>
-				<span>{{ field.label_tag }}</span>{{ field }}
+			<div class='fieldWrapper {{ field.label }}' id="{{ field.label }}">
+				<span>{{ field.label }}</span>{{ field }}
 			</div>
 			{% endfor %}
 			<div><input type="submit" value="Upload" /></div>

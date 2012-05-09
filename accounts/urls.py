@@ -28,5 +28,7 @@ urlpatterns = patterns('',
 	url(r'^user/$', all_users, name="all-users"),
     url(r'^user/all$', all_users, name="all-users"),
     url(r'^user/add$', add_user, name="add-user"),
+    
+    url(r'^manage/$', manage_accounts, name="manage-accounts"),
 )
 

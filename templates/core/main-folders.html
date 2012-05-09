@@ -2,14 +2,18 @@
 
 {% block title %} File Browser {% endblock %}
 
-{% block extra_head %}
+{% block js %}
 	<script>
 		$(document).ready(function(){
-			alert("javascript");
 			var elem = $(this).find('.add-folder');
 			$(elem).hide();
-			$(this).find('a.last').click(function(){
-				alert('Click!');
+			$(this).find('.actions a.last').click(function(){
+				var d = $(elem).css('display');
+				if(d == 'none'){
+					$(elem).show("slide", { direction: "left" }, 500);
+				}else{
+					$(elem).hide("slide", { direction: "left" }, 500);
+				}
 			});
 		});
 	</script>
@@ -20,7 +24,7 @@
 	<div class="line-spacer"></div>
 	<div class="actions">
 		<a href="{% url upload-file 'None' %}">Upload Document</a>
-		<a href="" class="last">Add Folder</a>
+		<a class="last">Add Folder</a>
 		<div class="add-folder">
 			<form method="POST" action="{% url add-folder 'None' %}">{% csrf_token %}
 				<input id="id_name" type="text" name="name" maxlength=120 placeholder="Enter Folder Name Here" />
@@ -36,7 +40,10 @@
 				<a class="filename" href="{% url open-folder folder.id %}">{{ folder.name }}</a><br /><br />
 				<span class="date">Upload Date: {{ folder.created|date:"d M Y f" }}</span><br />
 				<span class="uploaded-by">Uploaded by: {{ folder.created_by }}</span><br />
-				<span class="filesize">Sub-Folders:</span><br />
+				<div class="fileactions">
+					<a>Rename</a>
+					<a href="{% url delete-folder folder.id %}" class='last'>Delete</a>
+				</div>
 			</div>
 		{% endfor %}
 	</div>
