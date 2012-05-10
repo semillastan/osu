@@ -59,7 +59,7 @@
 		{% for file in files %}
 			<div class="fileupload">
 				<div class="filepreview"></div>
-				<a class="filename" href="">{{ file.filename }}</a><br /><br />
+				<a class="filename" href="{% url download-file file.id %}">{{ file.filename }}</a><br /><br />
 				<span class="date">Upload Date: {{ file.uploaded|date:"d M Y f" }}</span><br />
 				<span class="uploaded-by">Uploaded by: {{ file.uploaded_by }}</span><br />
 				<span class="filesize"></span><br />

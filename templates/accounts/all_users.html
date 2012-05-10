@@ -1,9 +1,35 @@
 {% extends 'base.html' %}
 
+{% block title %} Users {% endblock %}
+
+{% block js %}
+	<script>
+		$(document).ready(function(){
+		});
+	</script>
+{% endblock %}
+
 {% block body %}
-	<div>
+	<div class="home"><span class="title">Manage Accounts</span></div>
+	<div class="line-spacer"></div>
+	<div class="manage">
+		<a href="{% url all-users %}"><div class="type active"><div class="img"></div><span>Users</span></div></a>
+		<a href="{% url all-units %}"><div class="type"><div class="img"></div><span>Units</span></div></a>
+		<a href="{% url all-offices %}"><div class="type"><div class="img"></div><span>Offices</span></div></a>
+		<a href="{% url all-personnel-types %}"><div class="type"><div class="img"></div><span>User Types</span></div></a>
+	</div>
+	<div class="submanage">
+		<a href="{% url add-user %}"><div class="type"><div class="img"></div><span>Add User</span></div></a>
+	</div>
+	<div id="clear-both"></div>
+	<div class="line-spacer"></div>
+	<div class="accounts-body">
 		{% for user in users %}
-			<div><a href="">{{ user }}</a></div>
+			<div class="account">
+				<a href="">{{ user }}</a>
+				<div class="close {{user.id}}">X</div>
+			</div>
 		{% endfor %}
+		<div id="clear-both"></div>
 	</div>
 {% endblock %}

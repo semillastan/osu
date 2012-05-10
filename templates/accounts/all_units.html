@@ -1,9 +1,39 @@
 {% extends 'base.html' %}
 
+{% block title %} Units {% endblock %}
+
+{% block js %}
+	<script>
+		$(document).ready(function(){
+		});
+	</script>
+{% endblock %}
+
 {% block body %}
-	<div>
+	<div class="home"><span class="title">Manage Accounts</span></div>
+	<div class="line-spacer"></div>
+	<div class="manage">
+		<a href="{% url all-users %}"><div class="type"><div class="img"></div><span>Users</span></div></a>
+		<a href="{% url all-units %}"><div class="type active"><div class="img"></div><span>Units</span></div></a>
+		<a href="{% url all-offices %}"><div class="type"><div class="img"></div><span>Offices</span></div></a>
+		<a href="{% url all-personnel-types %}"><div class="type"><div class="img"></div><span>User Types</span></div></a>
+	</div>
+	<div class="submanage">
+		<a href="{% url add-unit %}"><div class="type"><div class="img"></div><span>Add UP Unit</span></div></a>
+		<form action="" method="post">{% csrf_token %}
+			<input type="text" name="name" placeholder="Enter name here"/>
+			<input type="submit" value="Add" />
+		</form>
+	</div>
+	<div id="clear-both"></div>
+	<div class="line-spacer"></div>
+	<div class="accounts-body">
 		{% for unit in units %}
-			<div><a href="">{{ unit }}</a></div>
+			<div class="account">
+				<a href="">{{ unit }}</a>
+				<div class="close {{unit.id}}">X</div>
+			</div>
 		{% endfor %}
+		<div id="clear-both"></div>
 	</div>
 {% endblock %}

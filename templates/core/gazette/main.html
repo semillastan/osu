@@ -3,5 +3,13 @@
 {% block title %} Gazette {% endblock %}
 
 {% block body %}
-
+	<div class="home"><span class="title">The UP Gazette</span></div>
+	<div class="line-spacer"></div>
+	<div class="gazette">
+		{% for subfolder in subfolders %}
+			<div class="year-folder">
+				{{ subfolder.name }}
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}

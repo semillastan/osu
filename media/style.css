@@ -510,6 +510,12 @@ a.upload {
 	float: left;
 }
 
+.manage .type.active {
+	background-color: #141414;
+	border-color: #690000;
+	color: #FFF;
+}
+
 .manage .type .img {
 	height: 25px;
 	width: 25px;
@@ -556,11 +562,11 @@ a.upload {
 	height: 30px;
 	background-color: #f6f6f6;
 	margin-bottom: 3px;
-	margin-right: 5px;
 	padding: 5px;
 	text-align: left;
 	border-left: 7px solid #141414;
 	float: left;
+	margin-right: 5px;
 }
 
 .submanage .type .img {
@@ -577,7 +583,6 @@ a.upload {
 	font-size: 15px;
 	margin-top: 5px;
 	float: left;
-	letter-spacing: 1px;
 }
 
 .submanage .type:hover {
@@ -589,4 +594,87 @@ a.upload {
 
 .submanage .type:hover .img {
 	background-color: #FFF;
+}
+
+.submanage form {
+	height: 35px;
+	width: 400px;
+	margin: 0;
+	float: left;
+}
+
+.submanage form input[type="text"] {
+	width: 200px;
+	height: 36px;
+	border: 0;
+	font-size: 20px;
+	color: #4b4b4b;
+	padding-left: 5px;
+	font-family: 'Dosis', sans-serif;
+	float: left;
+	border: 1px solid #d3d3d3;
+	border-right: 0;
+}
+
+.submanage form input[type="submit"] {
+	display: block;
+	width: 80px;
+	height: 40px;
+	padding: 5px;
+	background-color: #690000;
+	text-align: center;
+	line-height: 20px;
+	font-size: 18px;
+	color: #FFF;
+	border: 0;
+	float: left;
+	font-family: 'Dosis', sans-serif;
+	cursor: pointer;
+}
+
+
+.accounts-body {
+	width: 734px;
+	min-height: 20px;
+	padding-top: 5px;
+}
+
+.accounts-body .account {
+	width: 714px;
+	height: 30px;
+	margin-bottom: 3px;
+	margin-right: 5px;
+	padding: 10px;
+	text-align: left;
+	line-height: 30px;
+	font-size: 25px;
+	color: #141414;
+	border-bottom: 1px solid #dedede;
+}
+
+.accounts-body .account a {
+	color: #141414;
+	font-family:  'Dosis', sans-serif;
+}
+
+.accounts-body .account:hover {
+	background-color: #f6f6f6;
+}
+
+.accounts-body .account:hover .close {
+	display: block;
+}
+
+.accounts-body .close {
+	display: none;
+	width: 25px;
+	height: 25px;
+	background-color: #690000;
+	float: right;
+	margin-top: 3px;
+	color: #FFF;
+	text-align: center;
+	line-height: 25px;
+	font-size: 15px;
+	font-weight: bold;
 }

@@ -50,7 +50,10 @@ def upload_file(request, folder_id=None):
 		if folder:
 			return reverse_redirect('open-folder', args=[folder.id])
 		return reverse_redirect('main-folders')
-	return render_to_response("core/upload.html",{'form':form},
+	context = {'form':form}
+	if folder:
+		context['folder'] = folder
+	return render_to_response("core/upload.html",context,
             context_instance=RequestContext(request))
  
 def up_one_folder(request, folder_id=None): 
@@ -126,3 +129,9 @@ def rename_folder(request, folder_id=None):
 				return reverse_redirect('open-folder', args=[folder.parent.id])
 			return reverse_redirect('main-folders')
 	return reverse_redirect('404')
+
+def gazette(request):
+	folder = get_object_or_None(Folder, name='UP Gazette')
+	subfolders = Folder.objects.filter(parent=folder)
+	return render_to_response("core/gazette/main.html",{'folder':folder,'subfolders':subfolders},
+			context_instance=RequestContext(request))
