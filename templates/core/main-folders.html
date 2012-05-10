@@ -35,13 +35,35 @@
 	<br />
 	<div class="fileuploads">
 		{% for folder in folders %}
-			<div class="fileupload">
+			<div class="fileupload {{folder.id}}">
 				<div class="filepreview"></div>
-				<a class="filename" href="{% url open-folder folder.id %}">{{ folder.name }}</a><br /><br />
+				<a class="filename" href="{% url open-folder folder.id %}">{{ folder.name }}</a>
+				<form action="{% url rename-folder folder.id %}" method='post'>{% csrf_token %}
+					<input type='text' name='name' value="{{folder.name}}"/>
+					<input type='submit' value='Rename' />
+				</form>
+				<br /><br />
 				<span class="date">Upload Date: {{ folder.created|date:"d M Y f" }}</span><br />
 				<span class="uploaded-by">Uploaded by: {{ folder.created_by }}</span><br />
 				<div class="fileactions">
-					<a>Rename</a>
+					<a class='rename'>Rename</a>
+					<script>
+						$(document).ready(function(){
+							var x = $(this).find('.fileupload.{{folder.id}} .fileactions a.rename');
+							var y = $(this).find('.fileupload.{{folder.id}} a.filename');
+							var z = $(this).find('.fileupload.{{folder.id}} form');
+							$(z).hide();
+							$(x).click(function(){
+								if($(y).css('display') == 'none'){
+									$(y).show();
+									$(z).hide();
+								}else{
+									$(y).hide();
+									$(z).show();
+								}
+							});
+						});
+					</script>
 					<a href="{% url delete-folder folder.id %}" class='last'>Delete</a>
 				</div>
 			</div>

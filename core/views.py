@@ -112,3 +112,17 @@ def delete_folder(request, folder_id=None):
 				return reverse_redirect('open-folder', args=[id])
 			return reverse_redirect('main-folders')
 	return reverse_redirect('404')
+
+@login_required
+def rename_folder(request, folder_id=None):
+	folder = None
+	if folder_id:
+		folder = get_object_or_None(Folder, pk=folder_id)
+		if request.method == 'POST' and folder:
+			name = request.POST['name']
+			folder.name = name
+			folder.save()
+			if folder.parent:
+				return reverse_redirect('open-folder', args=[folder.parent.id])
+			return reverse_redirect('main-folders')
+	return reverse_redirect('404')

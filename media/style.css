@@ -350,6 +350,44 @@ a.upload {
 	font-size: 25px;
 }
 
+.fileuploads .fileupload form {
+	height: 35px;
+	width: 400px;
+	margin: 0;
+	float: left;
+}
+
+.fileuploads .fileupload form input[type="text"] {
+	width: 270px;
+	height: 30px;
+	border: 0;
+	font-size: 25px;
+	color: #4b4b4b;
+	padding-left: 5px;
+	font-family: 'Dosis', sans-serif;
+}
+
+.fileuploads .fileupload form input[type="submit"] {
+	display: block;
+	width: 100px;
+	height: 30px;
+	padding: 5px;
+	background-color: #690000;
+	text-align: center;
+	line-height: 20px;
+	font-size: 18px;
+	color: #FFF;
+	border-radius: 5px;
+	border: 0;
+	float: right;
+	font-family: 'Dosis', sans-serif;
+	cursor: pointer;
+}
+
+.fileuploads .fileupload form input[type="submit"]:hover {
+	background-color: #9A0000;
+}
+
 .fileuploads .fileupload .date, .fileuploads .fileupload .uploaded-by, .fileuploads .fileupload .filesize {
 	height: 14px;
 	font-size: 12px;
