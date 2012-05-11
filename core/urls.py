@@ -20,5 +20,6 @@ urlpatterns = patterns('',
 	url(r'^folders/rename/(?P<folder_id>[\w|-]+)/$', rename_folder, name="rename-folder"),
 	
 	url(r'^gazette/$', gazette, name="gazette"),
+	url(r'^bor/$', bor, name="bor"),
 	
 )

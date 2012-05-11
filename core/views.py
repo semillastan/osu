@@ -133,5 +133,16 @@ def rename_folder(request, folder_id=None):
 def gazette(request):
 	folder = get_object_or_None(Folder, name='UP Gazette')
 	subfolders = Folder.objects.filter(parent=folder)
-	return render_to_response("core/gazette/main.html",{'folder':folder,'subfolders':subfolders},
+	files = []
+	for subfolder in subfolders:
+		sub = {'name':subfolder.name}
+		_files = FileUpload.objects.filter(folder=subfolder)
+		sub['files'] = _files
+		files.append(sub)
+	return render_to_response("core/gazette/main.html",{'folder':folder,'subfolders':subfolders, 'files':files},
 			context_instance=RequestContext(request))
+
+def bor(request):
+	return render_to_response("core/bor/main.html",{'date':datetime.datetime.now()},
+			context_instance=RequestContext(request))
+

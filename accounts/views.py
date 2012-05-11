@@ -126,7 +126,7 @@ def add_personnel_type(request):
 			type = form.save(commit=False)
 			type.created_by = type.modified_by = request.user
 			type.save()
-			return reverse_redirect('home')
+			return reverse_redirect('all-personnel-types')
 	return {'form':form}
 	
 @login_required
@@ -141,7 +141,8 @@ def delete_personnel_type(request, type_id=None):
 @login_required
 def all_offices(request):
 	offices = Office.objects.all()
-	return {'offices':offices}
+	units = Unit.objects.all()
+	return {'offices':offices, 'units':units}
 
 @render_to('accounts/add_office.html')
 @login_required
@@ -153,13 +154,13 @@ def add_office(request):
 			type = form.save(commit=False)
 			type.created_by = type.modified_by = request.user
 			type.save()
-			return reverse_redirect('home')
+			return reverse_redirect('all-offices')
 	return {'form':form}
 
 @render_to('accounts/all_units.html')
 @login_required
 def all_units(request):
-	units = Unit.objects.all()
+	units = Unit.objects.all().order_by('name')
 	return {'units':units}
 
 @render_to('accounts/add_unit.html')
@@ -172,7 +173,7 @@ def add_unit(request):
 			unit = form.save(commit=False)
 			unit.created_by = unit.modified_by = request.user
 			unit.save()
-			return reverse_redirect('home')
+			return reverse_redirect('all-units')
 	return {'form':form}
 
 @render_to('accounts/manage-accounts.html')

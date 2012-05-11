@@ -7,8 +7,15 @@
 	<div class="line-spacer"></div>
 	<div class="gazette">
 		{% for subfolder in subfolders %}
-			<div class="year-folder">
-				{{ subfolder.name }}
+			<div class="folder">
+				<span class="name">{{ subfolder.name }}</span>
+				{% for x in files %}
+					{% for file in x.files %}
+						{% if file.folder == subfolder %}
+							<div class="file"><a href="{% url download-file file.id %}">{{ file.filename }}</a></div>
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
 			</div>
 		{% endfor %}
 	</div>

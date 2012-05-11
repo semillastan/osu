@@ -5,6 +5,16 @@
 {% block js %}
 	<script>
 		$(document).ready(function(){
+			var elem = $(this).find('.add-folder');
+			$(elem).hide();
+			$(this).find('.manage-actions a.last').click(function(){
+				var d = $(elem).css('display');
+				if(d == 'none'){
+					$(elem).show("slide", { direction: "left" }, 500);
+				}else{
+					$(elem).hide("slide", { direction: "left" }, 500);
+				}
+			});
 		});
 	</script>
 {% endblock %}
@@ -18,13 +28,17 @@
 		<a href="{% url all-offices %}"><div class="type"><div class="img"></div><span>Offices</span></div></a>
 		<a href="{% url all-personnel-types %}"><div class="type"><div class="img"></div><span>User Types</span></div></a>
 	</div>
-	<div class="submanage">
-		<a href="{% url add-unit %}"><div class="type"><div class="img"></div><span>Add UP Unit</span></div></a>
-		<form action="" method="post">{% csrf_token %}
-			<input type="text" name="name" placeholder="Enter name here"/>
-			<input type="submit" value="Add" />
-		</form>
+	<div id="clear-both"></div>
+	<div class="manage-actions">
+		<a class="last">Add Unit</a>
+		<div class="add-folder">
+			<form method="POST" action="{% url add-unit %}">{% csrf_token %}
+				<input id="id_name" type="text" name="name" maxlength=120 placeholder="Enter UP unit here" />
+				<input type='submit' value='Add' />
+			</form>
+		</div>
 	</div>
+	<br />
 	<div id="clear-both"></div>
 	<div class="line-spacer"></div>
 	<div class="accounts-body">

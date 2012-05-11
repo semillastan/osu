@@ -62,3 +62,37 @@ class FileUpload(models.Model):
 	def __unicode__(self):
 		return self.filename
 	
+class BORPosition(models.Model):
+	name = models.CharField(max_length=120, verbose_name="Position")
+	rank = models.PositiveIntegerField(default=0)
+	
+	created = models.DateTimeField(default=datetime.datetime.now())
+	created_by = models.ForeignKey(User, verbose_name="Created by", related_name="borposition_created_by")
+	modified = models.DateTimeField(default=datetime.datetime.now())
+	modified_by = models.ForeignKey(User, verbose_name="Modified by", related_name="borposition_modified_by")
+	
+	class Meta:
+		verbose_name = "BOR Position"
+		verbose_name_plural = "BOR Positions"
+	
+	def __unicode__(self):
+		return self.name
+
+class BOR(models.Model):
+	first_name = models.CharField(max_length=120)
+	middle_name = models.CharField(max_length=120, blank=True, null=True)
+	last_name = models.CharField(max_length=120)
+	description = models.CharField(verbose_name="Position/Office", max_length=400)
+	bor_position = models.ForeignKey(BORPosition, verbose_name="Position")
+
+	created = models.DateTimeField(default=datetime.datetime.now())
+	created_by = models.ForeignKey(User, verbose_name="Created by", related_name="bor_created_by")
+	modified = models.DateTimeField(default=datetime.datetime.now())
+	modified_by = models.ForeignKey(User, verbose_name="Modified by", related_name="bor_modified_by")
+	
+	class Meta:
+		verbose_name = "Board of Regent"
+		verbose_name_plural = "Board of Regents"
+	
+	def __unicode__(self):
+		return "{0}, {1} {2}".format(self.last_name, self.first_name, self.middle_name)

@@ -114,7 +114,7 @@ header .links .link a span {
 
 .banner a {
 	font-family: Proxima-SBold;
-	font-size: 36px;
+	font-size: 34px;
 	letter-spacing: -1px;
 	color: white;
 }
@@ -551,87 +551,86 @@ a.upload {
 	background-color: #FFF;
 }
 
-.submanage {
-	width: 734px;
-	min-height: 20px;
-	padding-top: 10px;
+.manage-actions {
+	min-height: 30px;
+	margin-top: 10px;
 }
 
-.submanage .type {
-	width: 160px;
-	height: 30px;
-	background-color: #f6f6f6;
-	margin-bottom: 3px;
-	padding: 5px;
-	text-align: left;
-	border-left: 7px solid #141414;
-	float: left;
-	margin-right: 5px;
-}
-
-.submanage .type .img {
-	height: 25px;
-	width: 25px;
-	float: left;
-	margin-right: 5px;
-	background-color: #4b4b4b;
-	margin-top: 3px;
-}
-
-.submanage .type span {
+.manage-actions a {
 	display: block;
-	font-size: 15px;
-	margin-top: 5px;
+	width: 120px;
+	height: 20px;
+	padding: 5px;
+	background-color: #f6f6f6;
+	border-bottom: 1px solid #d3d3d3;
+	border-left: 1px solid #d3d3d3;
+	border-top: 1px solid #d3d3d3;
+	text-align: center;
+	font-size: 14px;
+	line-height: 20px;
+	color: #141414;
+	font-family: Proxima;
 	float: left;
 }
 
-.submanage .type:hover {
-	cursor: pointer;
-	background-color: #4b4b4b;
-	border-color: #690000;
-	color: #FFF;
+.manage-actions a.last {
+	border-right: 1px solid #d3d3d3;
 }
 
-.submanage .type:hover .img {
+.manage-actions a:hover {
+	background-color: #4188d2;
+	cursor: pointer;
+}
+
+.manage-actions .add-folder {
+	width: 400px;
+	height: 25px;
+	float: left;
+}
+
+.manage-actions .add-folder form input[type="text"] {
+	width: 170px;
+	height: 28px;
+	line-height: 23px;
+	font-size: 13px;
+	border: 1px solid #d3d3d3;
+	border-left: 0;
+	border-right: 0;
+	padding-left: 5px;
+	float: left;
+	font-family: Proxima;
+}
+
+.manage-actions .add-folder form select {
+	width: 150px;
+	height: 32px;
+	line-height: 23px;
+	font-size: 12px;
+	border: 1px solid #d3d3d3;
+	border-right: 0;
+	padding-left: 5px;
+	float: left;
 	background-color: #FFF;
 }
 
-.submanage form {
-	height: 35px;
-	width: 400px;
-	margin: 0;
-	float: left;
-}
-
-.submanage form input[type="text"] {
-	width: 200px;
-	height: 36px;
-	border: 0;
-	font-size: 20px;
-	color: #4b4b4b;
-	padding-left: 5px;
-	font-family: 'Dosis', sans-serif;
-	float: left;
-	border: 1px solid #d3d3d3;
-	border-right: 0;
-}
-
-.submanage form input[type="submit"] {
-	display: block;
-	width: 80px;
-	height: 40px;
+.manage-actions .add-folder form input[type="submit"] {
+	width: 50px;
+	height: 32px;
 	padding: 5px;
-	background-color: #690000;
+	background-color: #f6f6f6;
+	border: 1px solid #d3d3d3;
 	text-align: center;
+	font-size: 14px;
 	line-height: 20px;
-	font-size: 18px;
-	color: #FFF;
-	border: 0;
+	color: #141414;
+	font-family: Proxima;
 	float: left;
-	font-family: 'Dosis', sans-serif;
 	cursor: pointer;
 }
 
+.manage-actions .add-folder form input[type="submit"]:hover {
+	background-color: #4188d2;
+}
 
 .accounts-body {
 	width: 734px;
@@ -677,4 +676,29 @@ a.upload {
 	line-height: 25px;
 	font-size: 15px;
 	font-weight: bold;
+}
+
+.gazette {
+	
+}
+
+.gazette .folder {
+	min-height: 50px;
+	border-bottom: 1px solid #dedede;
+	padding: 10px;
+}
+
+.gazette .folder span.name {
+	display: block;
+	font-size: 35px;
+}
+
+.gazette .folder .file {
+	height: 30px;
+	padding: 10px;
+	padding-left: 20px;
+}
+
+.gazette .folder .file a {
+	font-size: 20px;
 }

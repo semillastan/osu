@@ -8,15 +8,28 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
+        # Adding model 'Folder'
+        db.create_table('core_folder', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=120)),
+            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Folder'], null=True, blank=True)),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 5, 10, 22, 37, 0, 655598))),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='folder_created_by', to=orm['auth.User'])),
+            ('last_viewed', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 5, 10, 22, 37, 0, 655662))),
+            ('last_viewed_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='folder_last_viewed_by', to=orm['auth.User'])),
+        ))
+        db.send_create_signal('core', ['Folder'])
+
         # Adding model 'FileUpload'
         db.create_table('core_fileupload', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('filename', self.gf('django.db.models.fields.CharField')(unique=True, max_length=120)),
+            ('folder', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Folder'], null=True, blank=True)),
             ('file', self.gf('django.db.models.fields.files.FileField')(max_length=100)),
             ('public', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('uploaded', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 30, 1, 44, 50, 893989))),
+            ('uploaded', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 5, 10, 22, 37, 0, 656471))),
             ('uploaded_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='file_uploaded_by', to=orm['auth.User'])),
-            ('last_viewed', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 4, 30, 1, 44, 50, 894064))),
+            ('last_viewed', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 5, 10, 22, 37, 0, 656533))),
             ('last_viewed_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='file_last_viewed_by', to=orm['auth.User'])),
         ))
         db.send_create_signal('core', ['FileUpload'])
@@ -45,9 +58,39 @@ class Migration(SchemaMigration):
         ))
         db.create_unique('core_fileupload_allowed_users', ['fileupload_id', 'user_id'])
 
+        # Adding model 'BORPosition'
+        db.create_table('core_borposition', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=120)),
+            ('rank', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 5, 10, 22, 37, 0, 659296))),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='borposition_created_by', to=orm['auth.User'])),
+            ('modified', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 5, 10, 22, 37, 0, 659356))),
+            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='borposition_modified_by', to=orm['auth.User'])),
+        ))
+        db.send_create_signal('core', ['BORPosition'])
+
+        # Adding model 'BOR'
+        db.create_table('core_bor', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=120)),
+            ('middle_name', self.gf('django.db.models.fields.CharField')(max_length=120, null=True, blank=True)),
+            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=120)),
+            ('description', self.gf('django.db.models.fields.CharField')(max_length=400)),
+            ('bor_position', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.BORPosition'])),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 5, 10, 22, 37, 0, 660026))),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='bor_created_by', to=orm['auth.User'])),
+            ('modified', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2012, 5, 10, 22, 37, 0, 660090))),
+            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='bor_modified_by', to=orm['auth.User'])),
+        ))
+        db.send_create_signal('core', ['BOR'])
+
 
     def backwards(self, orm):
         
+        # Deleting model 'Folder'
+        db.delete_table('core_folder')
+
         # Deleting model 'FileUpload'
         db.delete_table('core_fileupload')
 
@@ -60,33 +103,39 @@ class Migration(SchemaMigration):
         # Removing M2M table for field allowed_users on 'FileUpload'
         db.delete_table('core_fileupload_allowed_users')
 
+        # Deleting model 'BORPosition'
+        db.delete_table('core_borposition')
+
+        # Deleting model 'BOR'
+        db.delete_table('core_bor')
+
 
     models = {
         'accounts.office': {
             'Meta': {'unique_together': "(('name', 'unit'),)", 'object_name': 'Office'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 890273)'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 652623)'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'office_created_by'", 'to': "orm['auth.User']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 890341)'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 652682)'}),
             'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'office_modified_by'", 'null': 'True', 'to': "orm['auth.User']"}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '120'}),
             'unit': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['accounts.Unit']"})
         },
         'accounts.personneltype': {
             'Meta': {'object_name': 'PersonnelType'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 889495)'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 651961)'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'type_created_by'", 'to': "orm['auth.User']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 889556)'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 652023)'}),
             'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'type_modified_by'", 'null': 'True', 'to': "orm['auth.User']"}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'})
         },
         'accounts.unit': {
             'Meta': {'object_name': 'Unit'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 888694)'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 651178)'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'unit_created_by'", 'to': "orm['auth.User']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 888778)'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 651373)'}),
             'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'unit_modified_by'", 'null': 'True', 'to': "orm['auth.User']"}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'})
         },
@@ -126,6 +175,29 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        'core.bor': {
+            'Meta': {'object_name': 'BOR'},
+            'bor_position': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.BORPosition']"}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 660026)'}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'bor_created_by'", 'to': "orm['auth.User']"}),
+            'description': ('django.db.models.fields.CharField', [], {'max_length': '400'}),
+            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '120'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '120'}),
+            'middle_name': ('django.db.models.fields.CharField', [], {'max_length': '120', 'null': 'True', 'blank': 'True'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 660090)'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'bor_modified_by'", 'to': "orm['auth.User']"})
+        },
+        'core.borposition': {
+            'Meta': {'object_name': 'BORPosition'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 659296)'}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'borposition_created_by'", 'to': "orm['auth.User']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 659356)'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'borposition_modified_by'", 'to': "orm['auth.User']"}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '120'}),
+            'rank': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'})
+        },
         'core.fileupload': {
             'Meta': {'object_name': 'FileUpload'},
             'allowed_offices': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'file_allowed_offices'", 'null': 'True', 'symmetrical': 'False', 'to': "orm['accounts.Office']"}),
@@ -133,12 +205,23 @@ class Migration(SchemaMigration):
             'allowed_users': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'file_allowed_users'", 'null': 'True', 'symmetrical': 'False', 'to': "orm['auth.User']"}),
             'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
             'filename': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'}),
+            'folder': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Folder']", 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_viewed': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 894064)'}),
+            'last_viewed': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 656533)'}),
             'last_viewed_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'file_last_viewed_by'", 'to': "orm['auth.User']"}),
             'public': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'uploaded': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 30, 1, 44, 50, 893989)'}),
+            'uploaded': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 656471)'}),
             'uploaded_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'file_uploaded_by'", 'to': "orm['auth.User']"})
+        },
+        'core.folder': {
+            'Meta': {'object_name': 'Folder'},
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 655598)'}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'folder_created_by'", 'to': "orm['auth.User']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'last_viewed': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 10, 22, 37, 0, 655662)'}),
+            'last_viewed_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'folder_last_viewed_by'", 'to': "orm['auth.User']"}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '120'}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Folder']", 'null': 'True', 'blank': 'True'})
         }
     }
 
