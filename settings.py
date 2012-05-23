@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'imagekit',
     'filetransfers',
     'fileupload',
+    'django_wysiwyg',
     
     'accounts',
     'core',

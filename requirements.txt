@@ -4,5 +4,5 @@ South==0.7.3
 django-imagekit==0.3.6
 wsgiref==0.1.2
 django-grappelli==2.3.8
-django-jquery-file-upload
+django-wysiwyg
 django_compressor
