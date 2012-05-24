@@ -6,3 +6,4 @@ wsgiref==0.1.2
 django-grappelli==2.3.8
 django-wysiwyg
 django_compressor
+django-tinymce

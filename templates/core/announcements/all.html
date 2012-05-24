@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Announcements {% endblock %}
+
+{% block body %}
+	<div class="home"><span class="title">Announcements</span></div>
+	<div class="line-spacer"></div>
+	<br />
+	<div class="fileuploads">
+		{% for announcement in announcements %}
+			<div class="fileupload">
+				<div class="filepreview"></div>
+				<a class="filename" href="">{{ announcement.title }}</a>
+				<span class="date">Date Announced: {{ announcement.created|date:"d M Y f" }}</span>
+				<span class="uploaded-by">Announced By: {{ announcement.created_by }}</span>
+				<div>
+					{% autoescape off %}
+						{{ announcement.content }}
+					{% endautoescape %}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('accounts.urls')),
     url(r'^', include('core.urls')),
     url(r'^a/', include('fileupload.urls')),
+    (r'^tinymce/', include('tinymce.urls')),
 )
 
 if settings.DEBUG:

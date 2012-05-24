@@ -7,6 +7,7 @@
         <script src="{{MEDIA_URL}}js/jquery.min.js"></script>
         <script src="{{MEDIA_URL}}js/jquery-ui.min.js"></script>
         <script src="{{MEDIA_URL}}js/dropdown.js"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}tiny_mce/tiny_mce.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Dosis:200,400,600,700' rel='stylesheet' type='text/css'>
         <script>
             $.ajaxSetup({ 
@@ -72,7 +73,7 @@
 					<a href="/about.html"><div class="link">About OSU</div></a>
 					<a href="{% url bor %}"><div class="link">The UP Board of Regents</div></a>
 					<a href="{% url gazette %}"><div class="link">The UP Gazette</div></a>
-					<a ><div class="link">Administrative Issuances</div></a>
+					<a href="{% url all-announcements %}"><div class="link">Announcements</div></a>
 					<a href="/contact.html"><div class="link">Contact Us</div></a>
 				</div>
 				<div class="extras">

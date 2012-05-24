@@ -22,4 +22,7 @@ urlpatterns = patterns('',
 	url(r'^gazette/$', gazette, name="gazette"),
 	url(r'^bor/$', bor, name="bor"),
 	
+	url(r'^announcements/$', all_announcements, name="all-announcements"),
+	url(r'^announcements/add$', add_announcement, name="add-announcement"),
+	
 )

@@ -96,3 +96,17 @@ class BOR(models.Model):
 	
 	def __unicode__(self):
 		return "{0}, {1} {2}".format(self.last_name, self.first_name, self.middle_name)
+
+class Announcement(models.Model):
+	title = models.CharField(max_length=120)
+	content = models.TextField()
+	
+	active = models.BooleanField(default=True)
+	
+	created = models.DateTimeField(default=datetime.datetime.now())
+	created_by = models.ForeignKey(User, verbose_name="Created by", related_name="announcement_created_by")
+	modified = models.DateTimeField(default=datetime.datetime.now())
+	modified_by = models.ForeignKey(User, verbose_name="Modified by", related_name="announcement_modified_by")
+	
+	def __unicode__(self):
+		return self.title

@@ -85,6 +85,7 @@ INSTALLED_APPS = (
     'filetransfers',
     'fileupload',
     'django_wysiwyg',
+    'tinymce',
     
     'accounts',
     'core',
@@ -92,6 +93,28 @@ INSTALLED_APPS = (
 )
 
 GRAPPELLI_ADMIN_TITLE = 'eOSU Site Admin'
+
+TINYMCE_JS_URL = MEDIA_URL + 'tiny_mce/tiny_mce.js'
+TINYMCE_JS_ROOT = MEDIA_ROOT + 'tiny_mce'
+TINYMCE_DEFAULT_CONFIG = {
+	'mode': "textareas",
+	'theme': "advanced",
+                
+    #Theme options - button# indicated the row# only
+    #'theme_advanced_buttons1' : "bold,italic,underline,,bullist,numlist,|",
+    #'theme_advanced_buttons2' : "cut,copy,paste,outdent,indent,|,undo,redo,|,|,code,preview,|,forecolor,backcolor",
+    #'theme_advanced_toolbar_location' : "top",
+    #'theme_advanced_toolbar_align' : "left",
+    #'theme_advanced_resizing' : 'true'
+    
+    'theme': "advanced",
+	'theme_advanced_toolbar_location' : "top",
+	'theme_advanced_buttons1': "bold,italic,underline,separator,bullist,separator,outdent,indent,separator,|,justifyleft,justifycenter,justifyright,fontselect,fontsizeselect,formatselect,link,unlink,anchor,image,",
+	'theme_advanced_buttons2': "",
+	'theme_advanced_buttons3': "",
+}
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 

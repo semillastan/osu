@@ -146,3 +146,21 @@ def bor(request):
 	return render_to_response("core/bor/main.html",{'date':datetime.datetime.now()},
 			context_instance=RequestContext(request))
 
+def all_announcements(request):
+	announcements = Announcement.objects.all()
+	return render_to_response("core/announcements/all.html",{'announcements':announcements},
+		context_instance=RequestContext(request))
+
+
+def add_announcement(request):
+	form = AnnouncementForm()
+	if request.method == 'POST':
+		form = AnnouncementForm(data=request.POST)
+		if form.is_valid():
+			announcement = form.save(commit=False)
+			announcement.created = announcement.modified = datetime.datetime.now()
+			announcement.created_by = announcement.modified_by = request.user
+			announcement.save()
+			return reverse_redirect('all-announcements')
+	return render_to_response("core/announcements/add.html",{'form':form},
+		context_instance=RequestContext(request))
