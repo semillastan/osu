@@ -28,32 +28,6 @@
 		
 			{% if request.user.is_authenticated %}
 				
-				{% if request.user.is_superuser %}
-				<!--<div>
-					<a class="upload" href="">Upload Document</a>
-				</div>
-				<div>
-					<span>UP Units</span>
-					<a href="">All</a>
-					<a href="{% url add-unit %}">Add</a>
-				</div>
-				<div>
-					<span>Personnel Type</span>
-					<a href="">All</a>
-					<a href="{% url add-personnel-type %}">Add</a>
-				</div>
-				<div>
-					<span>Offices</span>
-					<a href="">All</a>
-					<a href="{% url add-office %}">Add</a>
-				</div>
-				<div>
-					<span>Users</span>
-					<a href="">All</a>
-					<a href="{% url add-user %}">Add</a>
-				</div>-->
-				{% endif %}
-				
 			{% else %}
 				<form action="{% url login %}" method="post">{% csrf_token %}
 					<div><span>Username</span><input type="text" name="username" id="id_username" /></div>
@@ -62,15 +36,6 @@
 				</form>
 			{% endif %}
 			
-			<br />
-			<br />
-
-			{% wysiwyg_setup %}
-
-			<textarea id="foo"></textarea>
-
-			{% wysiwyg_editor "foo" %}
-			<!--<a class="upload" href="{% url all-files %}">All Files</a>-->
 		</div>
         <div id="clear-both"></div>
     </div>

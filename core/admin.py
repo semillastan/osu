@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import FileUpload, Folder, BORPosition, BOR, Announcement
+from core.models import *
 
 class FolderAdmin(admin.ModelAdmin):
 	list_display = ['name','parent','created','created_by','last_viewed','last_viewed_by']
@@ -40,8 +40,17 @@ class AnnouncementAdmin(admin.ModelAdmin):
         ('Modified', {'fields': ['modified','modified_by'], 'classes': ['collapse']}),
     ]
 
+class PageAdmin(admin.ModelAdmin):
+	change_form_template = 'core/admin/change_form.html'
+	fieldsets = [
+        (None,               {'fields': ['name','title','content']}),
+        ('Created', {'fields': ['created','created_by'], 'classes': ['collapse']}),
+        ('Modified', {'fields': ['modified','modified_by'], 'classes': ['collapse']}),
+    ]
+
 admin.site.register(Folder, FolderAdmin)
 admin.site.register(FileUpload, FileUploadAdmin)
 admin.site.register(BORPosition, BORPositionAdmin)
 admin.site.register(BOR, BORAdmin)
 admin.site.register(Announcement, AnnouncementAdmin)
+admin.site.register(Page, PageAdmin)

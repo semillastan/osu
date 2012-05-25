@@ -110,3 +110,16 @@ class Announcement(models.Model):
 	
 	def __unicode__(self):
 		return self.title
+
+class Page(models.Model):
+	name = models.CharField(max_length=120)
+	title = models.CharField(max_length=32)
+	content = models.TextField()
+	
+	created = models.DateTimeField(default=datetime.datetime.now())
+	created_by = models.ForeignKey(User, verbose_name="Created by", related_name="page_created_by")
+	modified = models.DateTimeField(default=datetime.datetime.now())
+	modified_by = models.ForeignKey(User, verbose_name="Modified by", related_name="page_modified_by")
+	
+	def __unicode__(self):
+		return self.name

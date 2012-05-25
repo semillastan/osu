@@ -17,3 +17,13 @@ class AnnouncementForm(forms.ModelForm):
     class Meta:
         model = Announcement
         exclude = ('active','created','created_by','modified','modified_by')
+
+class PageForm(forms.ModelForm):
+	class Meta:
+		model = Page
+		exclude = ('created','created_by','modified','modified_by')
+
+class EditPageForm(forms.ModelForm):
+	class Meta:
+		model = Page
+		exclude = ('name','created','created_by','modified','modified_by')

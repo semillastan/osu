@@ -76,13 +76,13 @@
 					<a href="{% url all-announcements %}"><div class="link">Announcements</div></a>
 					<a href="/contact.html"><div class="link">Contact Us</div></a>
 				</div>
+				{% if request.user.is_superuser %}
 				<div class="extras">
 					<span>Extras</span>
-					{% if request.user.is_superuser %}
-						<a href="{% url main-folders %}">File Browser</a>
-						<a href="{% url manage-accounts %}">Manage Accounts</a>
-					{% endif %}
+					<a href="{% url main-folders %}">File Browser</a>
+					<a href="{% url manage-accounts %}">Manage Accounts</a>
 				</div>
+				{% endif %}
 			</nav>
 			<div class="body">
 				{% block body %}{% endblock %}

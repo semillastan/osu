@@ -151,7 +151,6 @@ def all_announcements(request):
 	return render_to_response("core/announcements/all.html",{'announcements':announcements},
 		context_instance=RequestContext(request))
 
-
 def add_announcement(request):
 	form = AnnouncementForm()
 	if request.method == 'POST':
@@ -164,3 +163,29 @@ def add_announcement(request):
 			return reverse_redirect('all-announcements')
 	return render_to_response("core/announcements/add.html",{'form':form},
 		context_instance=RequestContext(request))
+
+def open_page(request, page=None):
+	if page:
+		page = get_object_or_None(Page, name=page)
+		if page:
+			return render_to_response("core/page/view.html",{'form':form},
+				context_instance=RequestContext(request))
+	return reverse_redirect('404')
+
+def edit_page(request, page=None):
+	if page:
+		page = get_object_or_None(Page, name=page)
+		if page:
+			form = EditPageForm(page)
+			if request.method == 'POST':
+				form = EditPageForm(data=request.POST)
+				if form.is_valid():
+					p = form.save(commit=False)
+					p.modified = datetime.datetime.now()
+					p.modified_by = request.user
+					p.save()
+					return reverse_redirect('home')
+			return render_to_response("core/page/edit.html",{'form':form},
+				context_instance=RequestContext(request))
+
+	return reverse_redirect('404')
