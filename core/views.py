@@ -168,9 +168,27 @@ def open_page(request, page=None):
 	if page:
 		page = get_object_or_None(Page, name=page)
 		if page:
-			return render_to_response("core/page/view.html",{'form':form},
+			return render_to_response("core/page/view.html",{'page':page},
 				context_instance=RequestContext(request))
 	return reverse_redirect('404')
+
+def open_about(request):
+	page = get_object_or_None(Page, name='about')
+	if page:
+		return render_to_response("about.html",{'page':page},
+			context_instance=RequestContext(request))
+			
+def open_home(request):
+	page = get_object_or_None(Page, name='home')
+	if page:
+		return render_to_response("core/page/view.html",{'page':page},
+			context_instance=RequestContext(request))
+
+def open_contact(request):
+	page = get_object_or_None(Page, name='contact')
+	if page:
+		return render_to_response("contact.html",{'page':page},
+			context_instance=RequestContext(request))
 
 def edit_page(request, page=None):
 	if page:
@@ -178,14 +196,13 @@ def edit_page(request, page=None):
 		if page:
 			form = EditPageForm(page)
 			if request.method == 'POST':
-				form = EditPageForm(data=request.POST)
-				if form.is_valid():
-					p = form.save(commit=False)
-					p.modified = datetime.datetime.now()
-					p.modified_by = request.user
-					p.save()
-					return reverse_redirect('home')
-			return render_to_response("core/page/edit.html",{'form':form},
+				page.content = request.POST['content']
+				page.name = request.POST['name']
+				page.modified = datetime.datetime.now()
+				page.modified_by = request.user
+				page.save()
+				return reverse_redirect('home')
+			return render_to_response("core/page/view.html",{'form':form, 'page':page},
 				context_instance=RequestContext(request))
 
 	return reverse_redirect('404')

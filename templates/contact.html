@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load wysiwyg %}
 
 {% block title  %} Contact {% endblock %}
 
@@ -12,19 +13,33 @@
 {% block body %}
 
     <div class="home">
+		{% if not form %}
+			<div class="no-font-style">
+				{% autoescape off %}
+					{{ page.content }}
+				{% endautoescape %}
+			</div>
+			<a href="{% url edit-page 'contact' %}">Edit</a>
+		{% endif %}
 		
-		<span class="title">Contact OSU</span>
-		<br /><br />
-		<span class="message"><b>Office of the Secretary of the University</b></span>
-		<span class="message small">Quezon Hall, Ground Floor [North Wing]</span>
-		<span class="message small">University of the Philippines Campus</span>
-		<span class="message small">Diliman, Quezon City</span>
-		<br />
-		<span class="message small">Telephone: 9206897; 9818500 VoIP 2534</span>
-		<span class="message small">Email Address: osu@up.edu.ph</span>
-		<br /><br />
-    
+		<div id="clear-both"></div>
+		
+		{% if form %}
+			{% wysiwyg_setup %}
+			<form class="wysiwyg" action="{% url edit-page 'contact' %}" method="post">{% csrf_token %}
+				<input type="hidden" id='id_name' name='name' value="contact" />
+				<textarea id="id_content" name="content">
+					{% autoescape off %}
+						{{ page.content }}
+					{% endautoescape %}
+				</textarea>
+				<br />
+				<input type="submit" value="Submit" />
+			{% wysiwyg_editor "id_content" %}
+			</form>
+			
+		{% endif %}
 		<div id="clear-both"></div>
 	</div>
-	
+	<div id="clear-both"></div>
 {% endblock %}

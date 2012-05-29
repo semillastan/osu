@@ -4,9 +4,13 @@ from helpers.utils import replace_urlpattern
 from core.views import *
 
 urlpatterns = patterns('',
-	url(r'^$', direct_to_template, {'template':'home.html'}, name="home"),
-	url(r'^about.html$', direct_to_template, {'template':'about.html'}, name="about"),
-	url(r'^contact.html$', direct_to_template, {'template':'contact.html'}, name="contact"),
+	url(r'^$', open_home, name="home"),
+	#url(r'^about$', open_about, name="about"),
+	#url(r'^contact$', open_contact, name="contact"),
+	url(r'^page/edit/(?P<page>[\w|-]+)$', edit_page, name="edit-page"),
+	
+	url(r'^(?P<page>[\w|-]+)$', open_page, name="open-page"),
+	
 	url(r'^404.html$', direct_to_template, {'template':'404.html'}, name="404"),
 	
 	url(r'^core/upload/(?P<folder_id>[\w|-]+)/$', upload_file, name="upload-file"),
@@ -24,5 +28,7 @@ urlpatterns = patterns('',
 	
 	url(r'^announcements/$', all_announcements, name="all-announcements"),
 	url(r'^announcements/add$', add_announcement, name="add-announcement"),
+	
+	
 	
 )

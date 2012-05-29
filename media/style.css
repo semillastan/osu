@@ -24,10 +24,6 @@ a {
     color: #3e97d1;
 }
 
-b {
-	font-family: Proxima-SBold;
-}
-
 .line-spacer {
 	height: 5px;
 	border-bottom: 1px solid #dedede;
@@ -40,7 +36,6 @@ body, html{
 	height: 90%;
 	background-color: #FFF;
 	color: #000;
-	font-family: 'Dosis', sans-serif;
 	letter-spacing: 0.5px;
 }
 
@@ -206,7 +201,7 @@ nav .extras span {
 
 form div {
 	min-height: 10px;
-	width: 500px;
+	min-width: 500px;
 	margin-bottom: 5px;
 }
 
@@ -261,9 +256,11 @@ footer {
 	padding: 10px;
 }
 
-footer .wrapper {
-	text-align: right;
-}
+footer .wrapper { text-align: right; }
+
+footer .right { float: right; }
+
+footer .left { float: left; }
 
 footer .wrapper span {
 	font-size: 12px;
@@ -289,7 +286,6 @@ a.upload {
 
 .home .title {
 	display: block;
-	font-family: Proxima-SBold;
 	font-size: 45px;
 	color: #141414;
 	letter-spacing: -1px;
@@ -297,7 +293,6 @@ a.upload {
 
 .home .subtitle {
 	display: block;
-	font-family: Proxima;
 	font-size: 15px;
 	color: #141414;
 	letter-spacing: -1px;
@@ -305,7 +300,6 @@ a.upload {
 
 .home .message {
 	display: block;
-	font-family: Proxima;
 	font-size: 26px;
 	color: #141414;
 	letter-spacing: -1px;
@@ -707,4 +701,14 @@ a.upload {
 #id_content_toolbargroup {
 	width: 500px;
 	height: 90px;
+}
+
+.no-font-style {
+	font-family: Arial;
+}
+
+form.wysiwyg div {
+	float: left;
+	min-width: 25px;
+	min-height: 20px;
 }

@@ -47,16 +47,12 @@
         <header>
             <div class="links">
 				<div class="left">
-					<div class="link"><a href="/">Home</a></div>
-					<div class="link"><a href="/about.html">About</a></div>
-					<div class="link"><a href="/contact.html">Contact</a></div>
-					<div class="link"><a href="/admin">Site Admin</a></div>
+					<div class="link"><a href="{% url open-page 'home' %}">Home</a></div>
+					<div class="link"><a href="{% url open-page 'about' %}">About</a></div>
+					<div class="link"><a href="{% url open-page 'contact' %}">Contact</a></div>
 				</div>
 				<div class="right">
-					{% if request.user.is_authenticated %}
-						<div class="link"><a href="{% url logout %}">Logout</a></div>
-						<div class="link"><a href=""><span>logged in as</span> {{request.user}}</a></div>
-					{% endif %}
+					
 				</div>
             </div>
         </header>
@@ -69,18 +65,18 @@
 		<div class="bodywrapper">
 			<nav>
 				<div class="main">
-					<a href="/"><div class="link">Home</div></a>
-					<a href="/about.html"><div class="link">About OSU</div></a>
-					<a href="{% url bor %}"><div class="link">The UP Board of Regents</div></a>
+					<a href="{% url open-page 'home' %}"><div class="link">Home</div></a>
+					<a href="{% url open-page 'about' %}"><div class="link">About OSU</div></a>
+					<a href="{% url open-page 'boardofregents' %}"><div class="link">The UP Board of Regents</div></a>
 					<a href="{% url gazette %}"><div class="link">The UP Gazette</div></a>
 					<a href="{% url all-announcements %}"><div class="link">Announcements</div></a>
-					<a href="/contact.html"><div class="link">Contact Us</div></a>
+					<a href="{% url open-page 'contact' %}"><div class="link">Contact Us</div></a>
 				</div>
 				{% if request.user.is_superuser %}
 				<div class="extras">
 					<span>Extras</span>
 					<a href="{% url main-folders %}">File Browser</a>
-					<a href="{% url manage-accounts %}">Manage Accounts</a>
+					<!--<a href="{% url manage-accounts %}">Manage Accounts</a>-->
 				</div>
 				{% endif %}
 			</nav>
@@ -90,7 +86,16 @@
 			<div style="clear:both"></div>
         </div>
         <footer>
-            <div class="wrapper">
+			<div class="wrapper left">
+				{% if request.user.is_authenticated %}
+					<span>logged in as {{request.user}}</span>
+					<span><a href="{% url logout %}">Logout</a></span>
+				{% else %}
+					<span><a href="{% url login %}">Login</a></span>
+				{% endif %}
+				<span><a href="/admin/">Site Admin</a></span>
+			</div>
+            <div class="wrapper right">
 				<span>Copyright © 2009-2012 OSUweb. All Rights Reserved.</span>
 			</div>
         </footer>

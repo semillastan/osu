@@ -13,30 +13,12 @@
 {% block body %}
 
     <div class="home">
-		
-		<span class="title">Welcome to eOSU!</span>
-		<span class="subtitle">The online environment of the Office of the Secretary of the University.</span>
-		<br /><br />
-		<span class="message"><b>Sec.15. The Secretary of the University and of the Board of Regents.</b></span>
-		<span class="message">There shall be a Secretary of the University appointed by the Board, who shall also be the Secretary of the Board, and who shall keep such records of the University as may be designated by the Board.</span>
-		<br />
-		<span class="message small">-- Republic Act No. 9500 [An Act to Strengthen the University of the Philippines as the National University]</span>
-		<br /><br />
-		
-		<div>
-			
-		
-			{% if request.user.is_authenticated %}
-				
-			{% else %}
-				<form action="{% url login %}" method="post">{% csrf_token %}
-					<div><span>Username</span><input type="text" name="username" id="id_username" /></div>
-					<div><span>Password</span><input type="password" name="password" id="id_password" /></div>
-					<div><input type="submit" name="submit" value="Login" /></div>
-				</form>
-			{% endif %}
-			
+		<div class="no-font-style">
+			{% autoescape off %}
+				{{ page.content }}
+			{% endautoescape %}
 		</div>
+		<br /><br />
         <div id="clear-both"></div>
     </div>
     

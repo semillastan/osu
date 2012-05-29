@@ -13,23 +13,33 @@
 {% block body %}
 
     <div class="home">
+		{% if not form %}
+			<div class="no-font-style">
+				{% autoescape off %}
+					{{ page.content }}
+				{% endautoescape %}
+			</div>
+			<a href="{% url edit-page 'about' %}">Edit</a>
+		{% endif %}
 		
-		<span class="title">About OSU</span>
-		<span class="subtitle">Office of the Secretary of the University.</span>
-		<br /><br />
-		<span class="message"><b>Sec.15. The Secretary of the University and of the Board of Regents.</b></span>
-		<span class="message">There shall be a Secretary of the University appointed by the Board, who shall also be the Secretary of the Board, and who shall keep such records of the University as may be designated by the Board.</span>
-		<br />
-		<span class="message small">-- Republic Act No. 9500 [An Act to Strengthen the University of the Philippines as the National University]</span>
-		<br /><br />
-    
 		<div id="clear-both"></div>
 		
-		{% wysiwyg_setup %}
-
-		<textarea id="foo">This is to test.</textarea>
-
-		{% wysiwyg_editor "foo" %}
+		{% if form %}
+			{% wysiwyg_setup %}
+			<form class="wysiwyg" action="{% url edit-page 'about' %}" method="post">{% csrf_token %}
+				<input type="hidden" id='id_name' name='name' value="about"/>
+				<textarea id="id_content" name="content">
+					{% autoescape off %}
+						{{ page.content }}
+					{% endautoescape %}
+				</textarea>
+				<br />
+				<input type="submit" value="Submit" />
+			{% wysiwyg_editor "id_content" %}
+			</form>
+			
+		{% endif %}
+		
 	</div>
 	
 {% endblock %}

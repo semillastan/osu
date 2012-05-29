@@ -73,7 +73,7 @@ def forgot_password(request):
             pass
     return {'forgot': True}
 
-@render_to('home.html')
+@render_to('registration/login.html')
 def login_user(request):
 	if request.method == "POST":
 		username = request.POST['username']
