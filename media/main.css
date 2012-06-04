@@ -1,0 +1,147 @@
+@charset "utf-8";
+/* CSS Document */
+}
+
+#clear-both {
+    clear: both !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+body, html {
+	margin: 0 auto;
+	padding: 0;
+	border: 0;
+	background-color: white;
+}
+
+header {
+	background-color: #a00610;
+	height: 150px;
+	width: 100%;
+	font-family: Arial, sans-serif;
+	color: white;
+}
+
+.wrapper {
+	width: 1024px;
+	margin: 0 auto;
+}
+
+header .wrapper .logo {
+	width: 300px;
+	height: 150px;
+	background-color: white;
+	color: black;
+	float: left;	
+}
+
+header .wrapper .logo .img {
+	width: 110px;
+	margin: 0 auto;
+	height: 110px;
+	margin-top: 10px;
+}
+
+header .wrapper .logo .img img {
+	width: 110px;
+	height: 110px;
+}
+
+header .wrapper .logo .caption {
+	width: 300px;
+	text-align: center;
+	margin-top: 5px;
+	height: 30px;
+	font-size: 20px;
+	font-family: Times New Roman, sans-serif;
+	color: black;
+}
+
+header .wrapper .links {
+	width: 724px;
+	height: 100px;
+	float: left;
+}
+
+header .wrapper .links .link {
+	float: left;
+	width: 167px;
+	height: 80px;
+	font-size: 18px;
+	color: white;
+	line-height: 150px;
+	text-align: center;
+	border-right: 1px solid white;
+}
+
+header .wrapper .links .link  a {
+	color: white;
+	letter-spacing: -1px;
+}
+
+header .wrapper .greybox {
+	float: left;
+	width: 724px;
+	background-color: #efefef;
+	height: 50px;
+}
+
+.banner {
+	background-color: white;
+	height: 250px;
+	width: 100%;
+	font-family: Arial, sans-serif;
+	color: black;
+}
+
+.banner .wrapper nav {
+	width: 300px;
+	background-color: white;
+	height: 250px;
+	float: left;
+}
+
+.banner .wrapper nav .links {
+	margin-top: 10px;
+}
+
+.banner .wrapper nav .links .link {
+	height: 26px;
+	width: 237px;
+	padding: 7px;
+	background-color: white;
+	color: #024522;
+	border-bottom: 1px solid #dedede;
+	line-height: 26px;
+	padding-left: 56px;
+	font-family: Times New Roman;
+}
+
+.banner .wrapper nav .links .link:hover {
+	background-color: #efefef;
+}
+
+.banner .wrapper .photo {
+	width: 724px;
+	height: 250px;
+	background-color: #ccc;
+	float: left;
+}
+
+.banner .wrapper .photo .caption {
+	z-index: 999;
+	background-color: #141414;
+	opacity: 0.8;
+	color: white;
+	font-size: 25px;
+	font-family: Arial, sans-serif;
+	padding: 7px;
+	height: 35px;
+	line-height: 35px;
+	margin-top: 200px;
+}
+
+.banner .wrapper .photo .caption a { color: white; }

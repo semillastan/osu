@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>{% block title %}{% endblock %}| Office of the Secretary of the University</title>
-        <link href="{{MEDIA_URL}}main.css" rel="stylesheet" type="text/css" />
+        <title>OSU | {% block title %}{% endblock %}</title>
+        <link rel="shortcut icon" href="{{MEDIA_URL}}images/favicon.ico" >
+        <link href="{{MEDIA_URL}}style.css" rel="stylesheet" type="text/css" />
         <script src="{{MEDIA_URL}}js/jquery.min.js"></script>
         <script src="{{MEDIA_URL}}js/jquery-ui.min.js"></script>
+        <script src="{{MEDIA_URL}}js/dropdown.js"></script>
         <script type="text/javascript" src="{{ MEDIA_URL }}tiny_mce/tiny_mce.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Dosis:200,400,600,700' rel='stylesheet' type='text/css'>
         <script>
@@ -43,51 +45,33 @@
     </head>
     <body>
         <header>
-			<div class="wrapper">
-				<div class="logo">
-					<div class="img">
-						<img src="{{MEDIA_URL}}images/up-official-seal.png" alt="" />
-					</div>
-					<div class="caption">
-						University of the Philippines
-					</div>
-					<div style="clear:both"></div>
-				</div>
-				<div class="links">
+            <div class="links">
+				<div class="left">
 					<div class="link"><a href="{% url open-page 'home' %}">Home</a></div>
-					<div class="link"><a href="{% url gazette %}">UP Gazette</a></div>
-					<div class="link"><a href="{% url open-page 'about' %}">About Us</a></div>
-					<div class="link"><a href="{% url open-page 'contact' %}">Contact Us</a></div>
+					<div class="link"><a href="{% url open-page 'about' %}">About</a></div>
+					<div class="link"><a href="{% url open-page 'contact' %}">Contact</a></div>
 				</div>
-				<div class="greybox">
-				
+				<div class="right">
+					
 				</div>
-			</div>
-            
+            </div>
         </header>
         <div style="clear:both"></div>
         <div class="banner">
 			<div class="wrapper">
-				<nav>
-					<div class="links">
-						<!--<a href="{% url open-page 'home' %}"><div class="link">Home</div></a>
-						<a href="{% url open-page 'about' %}"><div class="link">About OSU</div></a>-->
-						<a href="{% url open-page 'boardofregents' %}"><div class="link">The UP Board of Regents</div></a>
-						<a href="{% url gazette %}"><div class="link">The UP Gazette</div></a>
-						<a href="{% url all-announcements %}"><div class="link">Announcements</div></a>
-						<a href="/"><div class="link">Links</div></a>
-						<a href="{% url open-page 'contact' %}"><div class="link">Contact Us</div></a>
-						<!--<a href="{% url open-page 'contact' %}"><div class="link">Contact Us</div></a>-->
-					</div>
-				</nav>
-				<div class="photo">
-					<div class="caption"><a href="/">Office of the Secretary of the University</a></div>
-				</div>
+				<a href="/">Office of the Secretary of the University and of the Board of Regents</a>
             </div>
         </div>
-		<div class="wrapper">
+		<div class="bodywrapper">
 			<nav>
-				
+				<div class="main">
+					<a href="{% url open-page 'home' %}"><div class="link">Home</div></a>
+					<a href="{% url open-page 'about' %}"><div class="link">About OSU</div></a>
+					<a href="{% url open-page 'boardofregents' %}"><div class="link">The UP Board of Regents</div></a>
+					<a href="{% url gazette %}"><div class="link">The UP Gazette</div></a>
+					<a href="{% url all-announcements %}"><div class="link">Announcements</div></a>
+					<a href="{% url open-page 'contact' %}"><div class="link">Contact Us</div></a>
+				</div>
 				{% if request.user.is_superuser %}
 				<div class="extras">
 					<span>Extras</span>
