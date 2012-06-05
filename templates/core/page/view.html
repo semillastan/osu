@@ -6,35 +6,47 @@
 {% block body %}
 
     <div class="home">
-		{% if not form %}
-			<div class="no-font-style">
-				{% autoescape off %}
-					{{ page.content }}
-				{% endautoescape %}
-			</div>
-			{% if request.user.is_superuser %}
-				<a href="{% url edit-page page.name %}">Edit</a>
-			{% endif %}
-		{% endif %}
-		
-		<div id="clear-both"></div>
-		
-		{% if form %}
-			{% wysiwyg_setup %}
-			<form class="wysiwyg" action="{% url edit-page page.name %}" method="post">{% csrf_token %}
-				<input type="hidden" id='id_name' name='name' value="{{ page.name }}" />
-				<textarea id="id_content" name="content">
+		<div class="leftbox">
+			<div id="clear-both"></div>
+		</div>
+		<div class="rightbox">
+			{% if not form %}
+				<div class="no-font-style">
 					{% autoescape off %}
 						{{ page.content }}
 					{% endautoescape %}
-				</textarea>
-				<br />
-				<input type="submit" value="Submit" />
-			{% wysiwyg_editor "id_content" %}
-			</form>
+				</div>
+				{% if request.user.is_superuser %}
+					<a href="{% url edit-page page.name %}">Edit</a>
+				{% endif %}
+			{% endif %}
 			
-		{% endif %}
-		<div id="clear-both"></div>
+			<div id="clear-both"></div>
+			
+			{% if form %}
+				{% wysiwyg_setup %}
+				<form class="wysiwyg" action="{% url edit-page page.name %}" method="post">{% csrf_token %}
+					<input type="hidden" id='id_name' name='name' value="{{ page.name }}" />
+					<textarea id="id_content" name="content">
+						{% autoescape off %}
+							{{ page.content }}
+						{% endautoescape %}
+					</textarea>
+					<br />
+					<input type="submit" value="Submit" />
+				{% wysiwyg_editor "id_content" %}
+				</form>
+				
+			{% endif %}
+			<div id="clear-both"></div>
+        </div>
+        <script>
+			$(document).ready(function(){
+				var l = $('.leftbox').height();
+				var r = $('.rightbox').height();
+				if(l > r){ $('.rightbox').height(l); }else{ $('.leftbox').height(r); }
+			});
+        </script>
 	</div>
 	<div id="clear-both"></div>
 {% endblock %}

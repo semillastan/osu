@@ -141,7 +141,26 @@ header .wrapper .greybox {
 	padding: 7px;
 	height: 35px;
 	line-height: 35px;
-	margin-top: 200px;
+	margin-top: 201px;
 }
 
 .banner .wrapper .photo .caption a { color: white; }
+
+.home {
+	min-height: 20px;
+}
+
+.home .leftbox {
+	width: 300px;
+	min-height: 100px;
+	background-color: #efefef;
+	float: left;
+}
+
+.home .rightbox {
+	width: 704px;
+	min-height: 80px;
+	background-color: white;
+	float: left;
+	padding: 10px;
+}
